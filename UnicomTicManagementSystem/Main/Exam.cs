@@ -8,5 +8,9 @@ namespace UnicomTicManagementSystem.Main
 {
     internal class Exam
     {
+        public int examId { get; set; }
+        public string examName { get; set; }
+        public int subjectId { get; set; }
+
     }
 }
