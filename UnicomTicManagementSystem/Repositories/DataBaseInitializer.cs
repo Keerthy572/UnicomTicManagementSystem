@@ -97,6 +97,10 @@ namespace UnicomTicManagementSystem.Repositories
                             FOREIGN KEY (RoomId) REFERENCES Room(RoomId)
                         );";
 
+                SQLiteCommand CreateTable = new SQLiteCommand(initializeTableQuery, dbcon);
+                CreateTable.ExecuteNonQuery();
+
+
             }
         }
         
