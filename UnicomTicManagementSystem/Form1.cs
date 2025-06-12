@@ -34,20 +34,30 @@ namespace UnicomTicManagementSystem
             UserController userController = new UserController();
             var userList = userController.LoginCheck();
 
+            if (userList.Count == 0)
+            {
+                MessageBox.Show("No users found in the system.");
+                txtusername.Text = "";
+                txtpassword.Text = "";
+                return;
+            }
+
+            bool isAuthenticated = false;
+
             foreach ( var item in userList )
             {
                 if (item.userName == txtusername.Text &&  item.password == txtpassword.Text)
                 {
-                    MessageBox.Show("Login Success");
-                }
-                else
-                {
-                    num = 1;
-                }
-               
-               
+                    isAuthenticated = true;
+                }                                    
             }
-            if (num ==1)
+
+
+            if (isAuthenticated)
+            {
+                MessageBox.Show("Login successful");
+            }
+            else
             {
                 MessageBox.Show("Invalid Login");
             }
