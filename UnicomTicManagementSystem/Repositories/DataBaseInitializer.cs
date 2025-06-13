@@ -68,11 +68,13 @@ namespace UnicomTicManagementSystem.Repositories
                         CREATE TABLE IF NOT EXISTS Marks (
                             StudentId INTEGER,
                             ExamId INTEGER,
+                            MarkId INTEGER, 
                             Score INTEGER,
-                            PRIMARY KEY (StudentId, ExamId),
+                            PRIMARY KEY (StudentId, ExamId, MarkId),
                             FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
                             FOREIGN KEY (ExamId) REFERENCES Exam(ExamId)
                         );
+
 
                         CREATE TABLE IF NOT EXISTS LecturerStudent (
                             LecturerId INTEGER,
@@ -93,8 +95,46 @@ namespace UnicomTicManagementSystem.Repositories
                             SubjectId INTEGER,
                             RoomId INTEGER,
                             TimeSlot TEXT,
+                            LecturerId INTEGER,
                             FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId),
-                            FOREIGN KEY (RoomId) REFERENCES Room(RoomId)
+                            FOREIGN KEY (RoomId) REFERENCES Room(RoomId),
+                            FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId)
+
+                        ); 
+                        
+                        CREATE TABLE IF NOT EXISTS CourseSubject (
+                            CourseId INTEGER,
+                            SubjectId INTEGER,
+                            PRIMARY KEY (CourseId, SubjectId),
+                            FOREIGN KEY (CourseId) REFERENCES Course(CourseId),
+                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
+                        
+                        );
+
+                        CREATE TABLE IF NOT EXISTS StudentSubject (
+                            StudentId INTEGER,
+                            SubjectId INTEGER,
+                            PRIMARY KEY (StudentId, SubjectId),
+                            FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
+                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
+                        
+                        );
+
+                        CREATE TABLE IF NOT EXISTS LecturerSubject (
+                            LecturerId INTEGER,
+                            SubjectId INTEGER,
+                            PRIMARY KEY (LecturerId, SubjectId),
+                            FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId),
+                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
+                        
+                        );
+
+                        CREATE TABLE IF NOT EXISTS StudentTimetable (
+                            StudentId INTEGER,
+                            TimetableId INTEGER,
+                            PRIMARY KEY (StudentId, TimetableId),
+                            FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
+                            FOREIGN KEY (TimetableId) REFERENCES Timetable(TimetableId)
                         );";
 
                 SQLiteCommand CreateTable = new SQLiteCommand(initializeTableQuery, dbcon);

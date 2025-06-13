@@ -17,7 +17,7 @@ namespace UnicomTicManagementSystem.View
             InitializeComponent();
         }
 
-        private void LoadFormInPanel(Form childForm)
+        internal void LoadFormInAdminPanel(Form childForm)
         {
             mainPanel.Controls.Clear();
             childForm.TopLevel = false;
@@ -39,8 +39,12 @@ namespace UnicomTicManagementSystem.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //LoadFormInPanel(new ManageUsers());
+            LoadFormInAdminPanel(new ManageCourses(this));
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new ManageUsers());
         }
     }
 }

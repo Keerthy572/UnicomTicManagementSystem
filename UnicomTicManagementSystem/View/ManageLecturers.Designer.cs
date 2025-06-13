@@ -163,6 +163,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ManageLecturers";
             this.Text = "ManageLecturers";
+            this.Load += new System.EventHandler(this.ManageLecturers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

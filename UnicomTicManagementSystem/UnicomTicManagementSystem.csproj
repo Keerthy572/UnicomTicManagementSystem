@@ -89,6 +89,12 @@
     <Compile Include="View\AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageCourses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageCourses.Designer.cs">
+      <DependentUpon>ManageCourses.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageLecturers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,12 @@
     </Compile>
     <Compile Include="View\ManageStudents.Designer.cs">
       <DependentUpon>ManageStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageSubjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageSubjects.Designer.cs">
+      <DependentUpon>ManageSubjects.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ManageUsers.cs">
       <SubType>Form</SubType>
@@ -122,11 +134,17 @@
     <EmbeddedResource Include="View\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageCourses.resx">
+      <DependentUpon>ManageCourses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ManageLecturers.resx">
       <DependentUpon>ManageLecturers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageStudents.resx">
       <DependentUpon>ManageStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageSubjects.resx">
+      <DependentUpon>ManageSubjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageUsers.resx">
       <DependentUpon>ManageUsers.cs</DependentUpon>
