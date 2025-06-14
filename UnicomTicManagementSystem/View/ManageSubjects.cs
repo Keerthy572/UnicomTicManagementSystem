@@ -25,24 +25,41 @@ namespace UnicomTicManagementSystem.View
             RefreshDataGridView();
         }
 
+        private int selectedSubjectId = 0;
+
+        private void dataGridViewSubjects_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var subject = (Subject)dataGridViewSubjects.CurrentRow.DataBoundItem;
+                if (subject != null)
+                {
+                    selectedSubjectId = subject.subjectId;
+                    textBoxSubjectName.Text = subject.subjectName;
+                    comboBoxCourses.SelectedValue = subject.courseId;
+                }
+            }
+        }
+
+
         private void RefreshDataGridView()
         {
             SubjectController sub = new SubjectController();
             List<Subject> subjects = sub.GetAllSubjects();
 
-            dataGridView1.DataSource = subjects;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Columns["CourseName"].DisplayIndex = 0;
-            dataGridView1.Columns["SubjectName"].DisplayIndex = 1;
-            dataGridView1.Columns["CourseId"].Visible = false;
-            dataGridView1.Columns["SubjectId"].Visible = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewSubjects.DataSource = subjects;
+            dataGridViewSubjects.ReadOnly = true;
+            dataGridViewSubjects.Columns["CourseName"].DisplayIndex = 0;
+            dataGridViewSubjects.Columns["SubjectName"].DisplayIndex = 1;
+            dataGridViewSubjects.Columns["CourseId"].Visible = false;
+            dataGridViewSubjects.Columns["SubjectId"].Visible = false;
+            dataGridViewSubjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void ManageSubjects_Load(object sender, EventArgs e)
         {
             LoadCoursesIntoComboBox();
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxCourses.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
         private void LoadCoursesIntoComboBox()
@@ -50,10 +67,10 @@ namespace UnicomTicManagementSystem.View
             CourseController courseController = new CourseController();
             List<Course> courses = courseController.GetCourses();
 
-            comboBox1.DataSource = courses;
-            comboBox1.DisplayMember = "courseName"; 
-            comboBox1.ValueMember = "courseId";
-            comboBox1.SelectedIndex = -1;
+            comboBoxCourses.DataSource = courses;
+            comboBoxCourses.DisplayMember = "courseName"; 
+            comboBoxCourses.ValueMember = "courseId";
+            comboBoxCourses.SelectedIndex = -1;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,32 +85,101 @@ namespace UnicomTicManagementSystem.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == -1)
+            if (comboBoxCourses.SelectedIndex == -1)
             {
                 MessageBox.Show("Select a course to add subject");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            if (string.IsNullOrWhiteSpace(textBoxSubjectName.Text))
             {
                 MessageBox.Show("Type The subject to be added");
                 return;
             }
 
-            Course selectedCourse = (Course)comboBox1.SelectedItem;
+            Course selectedCourse = (Course)comboBoxCourses.SelectedItem;
             Subject subject = new Subject();
-            subject.subjectName = textBox1.Text;
+            subject.subjectName = textBoxSubjectName.Text;
 
             SubjectController subjectController = new SubjectController();
             string message = subjectController.AddSubject(subject, selectedCourse);
             MessageBox.Show(message);
-            comboBox1.SelectedIndex = -1;
-            textBox1.Text = "";
+            comboBoxCourses.SelectedIndex = -1;
+            textBoxSubjectName.Text = "";
 
             RefreshDataGridView();
 
 
 
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (selectedSubjectId == 0)
+            {
+                MessageBox.Show("Please select a subject to update.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(textBoxSubjectName.Text) || comboBoxCourses.SelectedValue == null)
+            {
+                MessageBox.Show("Please enter subject name and select a course.");
+                return;
+            }
+
+            Subject subject = new Subject
+            {
+                subjectId = selectedSubjectId,
+                subjectName = textBoxSubjectName.Text,
+                courseId = Convert.ToInt32(comboBoxCourses.SelectedValue)
+            };
+
+            SubjectController subjectController = new SubjectController();
+            string message = subjectController.UpdateSubject(subject);
+            MessageBox.Show(message);
+
+            RefreshSubjectGrid();
+            ClearFormInputs();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (selectedSubjectId == 0)
+            {
+                MessageBox.Show("Please select a subject to delete.");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this subject?", "Confirm Delete", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                SubjectController subjectController = new SubjectController();
+                string message = subjectController.DeleteSubject(selectedSubjectId);
+                MessageBox.Show(message);
+
+                RefreshSubjectGrid();
+                ClearFormInputs();
+            }
+        }
+
+        private void RefreshSubjectGrid()
+        {
+            SubjectController subjectController = new SubjectController();
+            dataGridViewSubjects.DataSource = subjectController.GetAllSubjects();
+            dataGridViewSubjects.Columns["subjectId"].Visible = false;
+            dataGridViewSubjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void ClearFormInputs()
+        {
+            textBoxSubjectName.Clear();
+            comboBoxCourses.SelectedIndex = -1;
+            selectedSubjectId = 0;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

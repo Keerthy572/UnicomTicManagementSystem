@@ -150,5 +150,10 @@ namespace UnicomTicManagementSystem.View
         {
             adminDashboard.LoadFormInAdminPanel(new ManageSubjects(adminDashboard));
         }
+
+        private void ManageCourses_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -53,5 +53,34 @@ namespace UnicomTicManagementSystem.Controllers
                 return subjectl;
             }
         }
+
+        public string UpdateSubject(Subject subject)
+        {
+            using (var Dbcon = DataBaseCon.Connection())
+            {
+                string updateQuery = "UPDATE Subjects SET SubjectName = @name, CourseId = @courseId WHERE SubjectId = @id;";
+                SQLiteCommand updateCommand = new SQLiteCommand(updateQuery, Dbcon);
+                updateCommand.Parameters.AddWithValue("@name", subject.subjectName);
+                updateCommand.Parameters.AddWithValue("@courseId", subject.courseId);
+                updateCommand.Parameters.AddWithValue("@id", subject.subjectId);
+
+                updateCommand.ExecuteNonQuery();
+                return "Subject updated successfully";
+            }
+        }
+
+        public string DeleteSubject(int subjectId)
+        {
+            using (var Dbcon = DataBaseCon.Connection())
+            {
+                string deleteQuery = "DELETE FROM Subjects WHERE SubjectId = @id;";
+                SQLiteCommand deleteCommand = new SQLiteCommand(deleteQuery, Dbcon);
+                deleteCommand.Parameters.AddWithValue("@id", subjectId);
+
+                deleteCommand.ExecuteNonQuery();
+                return "Subject deleted successfully";
+            }
+        }
+
     }
 }
