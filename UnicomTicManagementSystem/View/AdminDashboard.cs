@@ -44,7 +44,12 @@ namespace UnicomTicManagementSystem.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            LoadFormInAdminPanel(new ManageUsers());
+            LoadFormInAdminPanel(new ManageGroups());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new ManageUsers(this));
         }
     }
 }

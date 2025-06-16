@@ -104,6 +104,8 @@
             this.dataGridViewSubjects.Name = "dataGridViewSubjects";
             this.dataGridViewSubjects.Size = new System.Drawing.Size(341, 197);
             this.dataGridViewSubjects.TabIndex = 6;
+            this.dataGridViewSubjects.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubjects_CellClick_1);
+            this.dataGridViewSubjects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubjects_CellContentClick);
             // 
             // button3
             // 

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace UnicomTicManagementSystem.Main
 {
-    internal class LecturerStudent
+    internal class GroupStudent
     {
-        public int studentid {  get; set; }
-        public int lecturerId { get; set; }
+        public int studentId {  get; set; }
+        public int GroupId { get; set; }
     }
 }

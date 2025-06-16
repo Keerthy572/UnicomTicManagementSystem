@@ -26,11 +26,17 @@ namespace UnicomTicManagementSystem.Repositories
                             CourseName TEXT NOT NULL
                         );
 
+                        CREATE TABLE IF NOT EXISTS Groups (
+                            GroupId INTEGER PRIMARY KEY AUTOINCREMENT,
+                            GroupName TEXT NOT NULL
+                        );
+
                         CREATE TABLE IF NOT EXISTS Staff (
                             StaffId INTEGER PRIMARY KEY AUTOINCREMENT,
                             StaffName TEXT NOT NULL,
                             UserId INTEGER,
                             FOREIGN KEY (UserId) REFERENCES User(UserId)
+                            
                         );
 
                         CREATE TABLE IF NOT EXISTS Subjects (
@@ -45,8 +51,10 @@ namespace UnicomTicManagementSystem.Repositories
                             LecturerName TEXT NOT NULL,
                             UserID INTEGER,
                             SubjectId INTEGER,
+                            GroupId INTEGER,
                             FOREIGN KEY (UserID) REFERENCES User(UserId),
-                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
+                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId),
+                            FOREIGN KEY (GroupId) REFERENCES Groups(GroupId)
                         );
 
                         CREATE TABLE IF NOT EXISTS Student (
@@ -54,8 +62,10 @@ namespace UnicomTicManagementSystem.Repositories
                             StudentName TEXT NOT NULL,
                             UserId INTEGER,
                             CourseId INTEGER,
+                            GroupId INTEGER,
                             FOREIGN KEY (UserId) REFERENCES User(UserId),
-                            FOREIGN KEY (CourseId) REFERENCES Course(CourseId)
+                            FOREIGN KEY (CourseId) REFERENCES Course(CourseId),
+                            FOREIGN KEY (GroupId) REFERENCES Groups(GroupId)
                         );
 
                         CREATE TABLE IF NOT EXISTS Exam (

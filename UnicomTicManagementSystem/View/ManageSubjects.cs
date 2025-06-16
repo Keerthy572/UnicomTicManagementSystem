@@ -22,27 +22,19 @@ namespace UnicomTicManagementSystem.View
             this.Load += ManageSubjects_Load;
 
 
-            RefreshDataGridView();
+            RefreshSubjectGrid();
         }
 
         private int selectedSubjectId = 0;
+        private string selectedSubjectName;
 
         private void dataGridViewSubjects_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                var subject = (Subject)dataGridViewSubjects.CurrentRow.DataBoundItem;
-                if (subject != null)
-                {
-                    selectedSubjectId = subject.subjectId;
-                    textBoxSubjectName.Text = subject.subjectName;
-                    comboBoxCourses.SelectedValue = subject.courseId;
-                }
-            }
+            
         }
 
 
-        private void RefreshDataGridView()
+        private void RefreshSubjectGrid()
         {
             SubjectController sub = new SubjectController();
             List<Subject> subjects = sub.GetAllSubjects();
@@ -107,7 +99,7 @@ namespace UnicomTicManagementSystem.View
             comboBoxCourses.SelectedIndex = -1;
             textBoxSubjectName.Text = "";
 
-            RefreshDataGridView();
+            RefreshSubjectGrid();
 
 
 
@@ -147,7 +139,13 @@ namespace UnicomTicManagementSystem.View
         {
             if (selectedSubjectId == 0)
             {
-                MessageBox.Show("Please select a subject to delete.");
+                MessageBox.Show("Please select a subject from table to delete.");
+                return;
+            }
+
+            if (selectedSubjectName != textBoxSubjectName.Text)
+            {
+                MessageBox.Show("Please select a subject correctly from the table to delete.");
                 return;
             }
 
@@ -163,14 +161,7 @@ namespace UnicomTicManagementSystem.View
             }
         }
 
-        private void RefreshSubjectGrid()
-        {
-            SubjectController subjectController = new SubjectController();
-            dataGridViewSubjects.DataSource = subjectController.GetAllSubjects();
-            dataGridViewSubjects.Columns["subjectId"].Visible = false;
-            dataGridViewSubjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
+        
         private void ClearFormInputs()
         {
             textBoxSubjectName.Clear();
@@ -181,6 +172,26 @@ namespace UnicomTicManagementSystem.View
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridViewSubjects_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewSubjects_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var subject = (Subject)dataGridViewSubjects.CurrentRow.DataBoundItem;
+                if (subject != null)
+                {
+                    selectedSubjectId = subject.subjectId;
+                    selectedSubjectName = subject.subjectName;
+                    textBoxSubjectName.Text = subject.subjectName;
+                    comboBoxCourses.SelectedValue = subject.courseId;
+                }
+            }
         }
     }
 }
