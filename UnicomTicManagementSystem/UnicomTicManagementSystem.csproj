@@ -105,6 +105,12 @@
     <Compile Include="View\ManageCourses.Designer.cs">
       <DependentUpon>ManageCourses.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageExams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageExams.Designer.cs">
+      <DependentUpon>ManageExams.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageGroups.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,24 @@
     </Compile>
     <Compile Include="View\ManageLecturers.Designer.cs">
       <DependentUpon>ManageLecturers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageMarks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageMarks.Designer.cs">
+      <DependentUpon>ManageMarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageRoom.Designer.cs">
+      <DependentUpon>ManageRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageStaff.Designer.cs">
+      <DependentUpon>ManageStaff.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ManageStudents.cs">
       <SubType>Form</SubType>
@@ -156,11 +180,23 @@
     <EmbeddedResource Include="View\ManageCourses.resx">
       <DependentUpon>ManageCourses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageExams.resx">
+      <DependentUpon>ManageExams.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ManageGroups.resx">
       <DependentUpon>ManageGroups.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageLecturers.resx">
       <DependentUpon>ManageLecturers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageMarks.resx">
+      <DependentUpon>ManageMarks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageRoom.resx">
+      <DependentUpon>ManageRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageStaff.resx">
+      <DependentUpon>ManageStaff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageStudents.resx">
       <DependentUpon>ManageStudents.cs</DependentUpon>

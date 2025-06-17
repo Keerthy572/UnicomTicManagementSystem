@@ -73,15 +73,16 @@ namespace UnicomTicManagementSystem.Repositories
                             FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
                         );
 
-                        CREATE TABLE IF NOT EXISTS Marks (
+                       CREATE TABLE IF NOT EXISTS Marks (
+                            MarkId INTEGER PRIMARY KEY AUTOINCREMENT,
                             StudentId INTEGER,
                             ExamId INTEGER,
-                            MarkId INTEGER, 
-                            Score INTEGER,
-                            PRIMARY KEY (StudentId, ExamId, MarkId),
+                            Score INTEGER NULL,
                             FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
                             FOREIGN KEY (ExamId) REFERENCES Exam(ExamId)
                         );
+
+
 
 
                         CREATE TABLE IF NOT EXISTS LecturerStudent (

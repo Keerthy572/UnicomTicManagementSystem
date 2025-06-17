@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnicomTicManagementSystem.Forms;
 
 namespace UnicomTicManagementSystem.View
 {
@@ -50,6 +51,23 @@ namespace UnicomTicManagementSystem.View
         private void button3_Click(object sender, EventArgs e)
         {
             LoadFormInAdminPanel(new ManageUsers(this));
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new ManageRoom());
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new ManageExams());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new ManageMarks());
+
         }
     }
 }

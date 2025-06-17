@@ -11,6 +11,10 @@ namespace UnicomTicManagementSystem.Main
         public int examId { get; set; }
         public string examName { get; set; }
         public int subjectId { get; set; }
+        public string subjectName { get; set; }
+        public int courseId { get; set; }
+        public string courseName { get; set; }
+
 
     }
 }
