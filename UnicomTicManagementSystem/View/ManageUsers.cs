@@ -29,6 +29,9 @@ namespace UnicomTicManagementSystem.View
 
         }
 
-        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            adminDashboard.LoadFormInAdminPanel(new ManageLecturers(adminDashboard));
+        }
     }
 }

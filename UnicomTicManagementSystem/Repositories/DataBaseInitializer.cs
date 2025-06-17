@@ -49,11 +49,9 @@ namespace UnicomTicManagementSystem.Repositories
                         CREATE TABLE IF NOT EXISTS Lecturer (
                             LecturerId INTEGER PRIMARY KEY AUTOINCREMENT,
                             LecturerName TEXT NOT NULL,
-                            UserID INTEGER,
-                            SubjectId INTEGER,
+                            UserID INTEGER,                            
                             GroupId INTEGER,
-                            FOREIGN KEY (UserID) REFERENCES User(UserId),
-                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId),
+                            FOREIGN KEY (UserID) REFERENCES User(UserId),                            
                             FOREIGN KEY (GroupId) REFERENCES Groups(GroupId)
                         );
 
@@ -130,12 +128,12 @@ namespace UnicomTicManagementSystem.Repositories
                         
                         );
 
-                        CREATE TABLE IF NOT EXISTS LecturerSubject (
+                        CREATE TABLE IF NOT EXISTS LecturerCourse (
                             LecturerId INTEGER,
-                            SubjectId INTEGER,
-                            PRIMARY KEY (LecturerId, SubjectId),
+                            CourseId INTEGER,
+                            PRIMARY KEY (LecturerId, CourseId),
                             FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId),
-                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
+                            FOREIGN KEY (CourseId) REFERENCES Course(CourseId)
                         
                         );
 

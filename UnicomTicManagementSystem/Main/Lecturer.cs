@@ -11,7 +11,17 @@ namespace UnicomTicManagementSystem.Main
         public int lecturerId {  get; set; }
         public string lecturerName { get; set; }
         public int userId { get; set; }
-        public int subjectId { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+        public int courseId { get; set; }
+        public string courseName { get; set; }
+        public int GroupId { get; set; }
+        public string groupName { get; set; }
+
+
+
+
+
 
     }
 }

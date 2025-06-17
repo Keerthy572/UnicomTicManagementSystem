@@ -55,6 +55,7 @@
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\LecturerController.cs" />
+    <Compile Include="Controllers\LecturerCourseController.cs" />
     <Compile Include="Controllers\LecturerStudentController.cs" />
     <Compile Include="Controllers\MarkController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Main\Group.cs" />
     <Compile Include="Main\Lecturer.cs" />
     <Compile Include="Main\GroupStudent.cs" />
+    <Compile Include="Main\LecturerCourse.cs" />
     <Compile Include="Main\Mark.cs" />
     <Compile Include="Main\Room.cs" />
     <Compile Include="Main\Staff.cs" />
@@ -90,6 +92,12 @@
     </Compile>
     <Compile Include="View\AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LecturersCourses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LecturersCourses.Designer.cs">
+      <DependentUpon>LecturersCourses.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ManageCourses.cs">
       <SubType>Form</SubType>
@@ -141,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="View\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LecturersCourses.resx">
+      <DependentUpon>LecturersCourses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageCourses.resx">
       <DependentUpon>ManageCourses.cs</DependentUpon>
