@@ -54,11 +54,16 @@ public class TimeSlotController
         }
     }
 
-    public bool TimeSlotExists(string startTime, string endTime, int? excludeId = null)
+    public bool TimeSlotOverlaps(string startTime, string endTime, int? excludeId = null)
     {
         using (var con = DataBaseCon.Connection())
         {
-            string query = "SELECT COUNT(*) FROM TimeSlot WHERE StartTime = @start AND EndTime = @end";
+            string query = @"
+            SELECT COUNT(*) 
+            FROM TimeSlot 
+            WHERE 
+                (StartTime < @end AND EndTime > @start)";
+
             if (excludeId.HasValue)
             {
                 query += " AND TimeSlotId != @id";
@@ -76,5 +81,6 @@ public class TimeSlotController
             }
         }
     }
+
 
 }

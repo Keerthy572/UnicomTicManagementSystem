@@ -15,15 +15,18 @@ namespace UnicomTicManagementSystem.Controllers
             using (var con = DataBaseCon.Connection())
             {
                 string query = @"
-                    SELECT t.TimetableId, t.Date, 
-                           ts.StartTime || ' - ' || ts.EndTime AS TimeSlot,
-                           g.GroupName, l.LecturerName, s.SubjectName, r.RoomName
-                    FROM Timetable t
-                    JOIN TimeSlot ts ON t.TimeSlotId = ts.TimeSlotId
-                    JOIN Groups g ON t.GroupId = g.GroupId
-                    JOIN Lecturer l ON t.LecturerId = l.LecturerId
-                    JOIN Subjects s ON t.SubjectId = s.SubjectId
-                    JOIN Room r ON t.RoomId = r.RoomId";
+        SELECT t.TimetableId, t.Date,
+               t.TimeSlotId, ts.StartTime, ts.EndTime,
+               t.GroupId, g.GroupName,
+               t.LecturerId, l.LecturerName,
+               t.SubjectId, s.SubjectName,
+               t.RoomId, r.RoomName
+        FROM Timetable t
+        JOIN TimeSlot ts ON t.TimeSlotId = ts.TimeSlotId
+        JOIN Groups g ON t.GroupId = g.GroupId
+        JOIN Lecturer l ON t.LecturerId = l.LecturerId
+        JOIN Subjects s ON t.SubjectId = s.SubjectId
+        JOIN Room r ON t.RoomId = r.RoomId";
 
                 using (var cmd = new SQLiteCommand(query, con))
                 using (var reader = cmd.ExecuteReader())
@@ -34,17 +37,31 @@ namespace UnicomTicManagementSystem.Controllers
                         {
                             TimetableId = Convert.ToInt32(reader["TimetableId"]),
                             Date = reader["Date"].ToString(),
-                            TimeSlot = reader["TimeSlot"].ToString(),
+
+                            TimeSlotId = Convert.ToInt32(reader["TimeSlotId"]),
+                            StartTime = reader["StartTime"].ToString(),
+                            EndTime = reader["EndTime"].ToString(),
+                            TimeSlot = reader["StartTime"] + " - " + reader["EndTime"],
+
+                            GroupId = Convert.ToInt32(reader["GroupId"]),
                             GroupName = reader["GroupName"].ToString(),
+
+                            LecturerId = Convert.ToInt32(reader["LecturerId"]),
                             LecturerName = reader["LecturerName"].ToString(),
-                            SubjectId = 0, // Not shown in this query
-                            RoomId = 0, // Not shown in this query
+
+                            SubjectId = Convert.ToInt32(reader["SubjectId"]),
+                            SubjectName = reader["SubjectName"].ToString(),
+
+                            RoomId = Convert.ToInt32(reader["RoomId"]),
+                            RoomName = reader["RoomName"].ToString()
                         });
                     }
                 }
             }
             return list;
         }
+
+
 
         public List<Room> GetRooms()
         {

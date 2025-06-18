@@ -29,6 +29,7 @@ namespace UnicomTicManagementSystem.View
         private void LoadTimeSlots()
         {
             dgvTimeSlots.DataSource = controller.GetTimeSlots();
+            dgvTimeSlots.ReadOnly = true;
             dgvTimeSlots.AllowUserToAddRows = false;
             dgvTimeSlots.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -46,11 +47,12 @@ namespace UnicomTicManagementSystem.View
                 return;
             }
 
-            if (controller.TimeSlotExists(start, end))
+            if (controller.TimeSlotOverlaps(start, end))
             {
-                MessageBox.Show("This time slot already exists.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("This time range overlaps with an existing slot.", "Overlap", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
 
             controller.AddTimeSlot(start, end);
             LoadTimeSlots();
@@ -82,11 +84,12 @@ namespace UnicomTicManagementSystem.View
                 return;
             }
 
-            if (controller.TimeSlotExists(start, end, selectedTimeSlotId))
+            if (controller.TimeSlotOverlaps(start, end, selectedTimeSlotId))
             {
-                MessageBox.Show("Another time slot with the same time already exists.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("This time range overlaps with another existing slot.", "Overlap", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
 
             controller.UpdateTimeSlot(selectedTimeSlotId, start, end);
             LoadTimeSlots();
