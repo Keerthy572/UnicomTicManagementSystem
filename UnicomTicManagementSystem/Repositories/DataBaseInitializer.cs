@@ -99,13 +99,23 @@ namespace UnicomTicManagementSystem.Repositories
                             RoomType TEXT NOT NULL 
                         );
 
+                        CREATE TABLE IF NOT EXISTS TimeSlot (
+                            TimeSlotId INTEGER PRIMARY KEY AUTOINCREMENT,
+                            StartTime TEXT NOT NULL,
+                            EndTime TEXT NOT NULL
+                        );
+
                         CREATE TABLE IF NOT EXISTS Timetable (
                             TimetableId INTEGER PRIMARY KEY AUTOINCREMENT,
                             SubjectId INTEGER,
                             RoomId INTEGER,
-                            TimeSlot TEXT,
+                            TimeSlotId INTEGER,
                             LecturerId INTEGER,
+                            Date TEXT,
+                            GroupId INTEGER,
+                            FOREIGN KEY (GroupId) REFERENCES Groups(GroupId),
                             FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId),
+                            FOREIGN KEY (TimeSlotId) REFERENCES TimeSlot(TimeSlotId),
                             FOREIGN KEY (RoomId) REFERENCES Room(RoomId),
                             FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId)
 
@@ -137,6 +147,9 @@ namespace UnicomTicManagementSystem.Repositories
                             FOREIGN KEY (CourseId) REFERENCES Course(CourseId)
                         
                         );
+
+                        
+
 
                         CREATE TABLE IF NOT EXISTS StudentTimetable (
                             StudentId INTEGER,

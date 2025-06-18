@@ -62,6 +62,7 @@
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\TimeSlotController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Form1.cs">
@@ -81,6 +82,7 @@
     <Compile Include="Main\Staff.cs" />
     <Compile Include="Main\Student.cs" />
     <Compile Include="Main\Subject.cs" />
+    <Compile Include="Main\TimeSlot.cs" />
     <Compile Include="Main\Timetable.cs" />
     <Compile Include="Main\User.cs" />
     <Compile Include="Program.cs" />
@@ -92,6 +94,12 @@
     </Compile>
     <Compile Include="View\AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateTimetable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CreateTimetable.Designer.cs">
+      <DependentUpon>CreateTimetable.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LecturersCourses.cs">
       <SubType>Form</SubType>
@@ -153,11 +161,23 @@
     <Compile Include="View\ManageSubjects.Designer.cs">
       <DependentUpon>ManageSubjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageTimeSlot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageTimeSlot.Designer.cs">
+      <DependentUpon>ManageTimeSlot.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageUsers.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\ManageUsers.Designer.cs">
       <DependentUpon>ManageUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageTimetable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageTimetable.Designer.cs">
+      <DependentUpon>ManageTimetable.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -173,6 +193,9 @@
     </Compile>
     <EmbeddedResource Include="View\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CreateTimetable.resx">
+      <DependentUpon>CreateTimetable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LecturersCourses.resx">
       <DependentUpon>LecturersCourses.cs</DependentUpon>
@@ -204,8 +227,14 @@
     <EmbeddedResource Include="View\ManageSubjects.resx">
       <DependentUpon>ManageSubjects.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageTimeSlot.resx">
+      <DependentUpon>ManageTimeSlot.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ManageUsers.resx">
       <DependentUpon>ManageUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ManageTimetable.resx">
+      <DependentUpon>ManageTimetable.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

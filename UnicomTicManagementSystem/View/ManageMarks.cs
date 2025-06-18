@@ -52,7 +52,7 @@ namespace UnicomTicManagementSystem.View
             {
                 int examId = Convert.ToInt32(comboBox1.SelectedValue);
                 markController.AddOrUpdateMarks(examId, dataGridView1);
-                MessageBox.Show("Marks saved successfully.");
+               
             }
             catch (Exception ex)
             {

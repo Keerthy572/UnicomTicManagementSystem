@@ -16,6 +16,7 @@ namespace UnicomTicManagementSystem.View
         public AdminDashboard()
         {
             InitializeComponent();
+            
         }
 
         internal void LoadFormInAdminPanel(Form childForm)
@@ -67,6 +68,17 @@ namespace UnicomTicManagementSystem.View
         private void button6_Click(object sender, EventArgs e)
         {
             LoadFormInAdminPanel(new ManageMarks());
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new ManageTimeSlot());
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            LoadFormInAdminPanel(new CreateTimetable());
 
         }
     }

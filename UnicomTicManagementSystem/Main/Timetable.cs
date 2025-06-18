@@ -8,11 +8,25 @@ namespace UnicomTicManagementSystem.Main
 {
     internal class Timetable
     {
-        public int timetableId { get; set; }
-        public int subjectId { get; set; }
-        public int roomId { get; set; }
-        public string timeSlot { get; set; }
+        public int TimetableId { get; set; }
 
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
 
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+
+        public int TimeSlotId { get; set; }
+        public string TimeSlot { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+
+        public int LecturerId { get; set; }
+        public string LecturerName { get; set; }
+
+        public int GroupId { get; set; }
+        public string GroupName { get; set; }
+
+        public string Date { get; set; } // Stored as TEXT ("yyyy-MM-dd")
     }
 }
