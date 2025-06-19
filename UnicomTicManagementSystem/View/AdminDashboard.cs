@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Forms;
+using UnicomTicManagementSystem.Repositories;
 
 namespace UnicomTicManagementSystem.View
 {
@@ -15,7 +16,7 @@ namespace UnicomTicManagementSystem.View
     {
         public AdminDashboard()
         {
-            InitializeComponent();
+            InitializeComponent();        
             
         }
 

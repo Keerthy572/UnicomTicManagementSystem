@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Repositories;
+using UnicomTicManagementSystem.View;
 
 namespace UnicomTicManagementSystem
 {
@@ -25,6 +27,7 @@ namespace UnicomTicManagementSystem
         }
 
         public int num;
+        public string usertype;
         private void button1_Click(object sender, EventArgs e)
         {
             User user1 = new User();
@@ -49,6 +52,8 @@ namespace UnicomTicManagementSystem
                 if (item.userName == txtusername.Text &&  item.password == txtpassword.Text)
                 {
                     isAuthenticated = true;
+                    usertype = item.userType;
+                    Dashboard.userId = item.userId;
                 }                                    
             }
 
@@ -56,6 +61,26 @@ namespace UnicomTicManagementSystem
             if (isAuthenticated)
             {
                 MessageBox.Show("Login successful");
+                if(usertype == "admin")
+                {
+                    this.Hide();
+                    var form = new AdminDashboard();
+                    form.ShowDialog();
+                    this.Close();
+                }
+                else if (usertype == "student")
+                {
+
+                }
+                else if (usertype == "lecturer")
+                {
+
+                }
+                else if (usertype == "staff")
+                {
+
+                }
+
             }
             else
             {

@@ -4,6 +4,9 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnicomTicManagementSystem.View;
+using System.Windows.Forms;
+
 
 namespace UnicomTicManagementSystem.Repositories
 {
@@ -165,6 +168,24 @@ namespace UnicomTicManagementSystem.Repositories
 
             }
         }
-        
+
+        public static void AdminRegistration()
+        {
+            using (SQLiteConnection conn = DataBaseCon.Connection())
+            {
+                
+                string checkQuery = "SELECT COUNT(*) FROM User";
+                using (SQLiteCommand checkCmd = new SQLiteCommand(checkQuery, conn))
+                {
+                    long count = (long)checkCmd.ExecuteScalar();
+                    if (count == 0)
+                    {
+                        Application.Run(new AdminRegisterForm());
+                    }
+                }
+            }
+        }
+
+
     }
 }

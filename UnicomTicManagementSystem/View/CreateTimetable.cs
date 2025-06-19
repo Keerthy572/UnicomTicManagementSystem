@@ -258,5 +258,10 @@ namespace UnicomTicManagementSystem.View
             controller.DeleteTimetable(selectedTimetableId);
             LoadGrid();
         }
+
+        private void CreateTimetable_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

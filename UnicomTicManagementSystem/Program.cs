@@ -17,12 +17,14 @@ namespace UnicomTicManagementSystem
         static void Main()
         {
             DataBaseInitializer dataBaseInitializer = new DataBaseInitializer();
-            dataBaseInitializer.InitializeTable();
+            dataBaseInitializer.InitializeTable();           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            Application.Run(new AdminDashboard());
-            
+            //DataBaseInitializer.AdminRegistration();
+            Application.Run(new Form1());
+            //Application.Run(new AdminDashboard());
+            Application.Run(new StudentDashboard());
+
         }
     }
 }
