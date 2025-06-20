@@ -20,10 +20,10 @@ namespace UnicomTicManagementSystem
             dataBaseInitializer.InitializeTable();           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //DataBaseInitializer.AdminRegistration();
+            DataBaseInitializer.AdminRegistration();
             Application.Run(new Form1());
             //Application.Run(new AdminDashboard());
-            Application.Run(new StudentDashboard());
+            //Application.Run(new LecturerDashboard());
 
         }
     }

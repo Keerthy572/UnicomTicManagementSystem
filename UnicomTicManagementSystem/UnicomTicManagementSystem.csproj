@@ -109,6 +109,12 @@
     <Compile Include="View\CreateTimetable.Designer.cs">
       <DependentUpon>CreateTimetable.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\LecturerDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LecturerDashboard.Designer.cs">
+      <DependentUpon>LecturerDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LecturersCourses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,12 @@
     <Compile Include="View\ManageTimetable.Designer.cs">
       <DependentUpon>ManageTimetable.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\StaffDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StaffDashboard.Designer.cs">
+      <DependentUpon>StaffDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\StudentDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CreateTimetable.resx">
       <DependentUpon>CreateTimetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LecturerDashboard.resx">
+      <DependentUpon>LecturerDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LecturersCourses.resx">
       <DependentUpon>LecturersCourses.cs</DependentUpon>
@@ -252,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageTimetable.resx">
       <DependentUpon>ManageTimetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StaffDashboard.resx">
+      <DependentUpon>StaffDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\StudentDashboard.resx">
       <DependentUpon>StudentDashboard.cs</DependentUpon>

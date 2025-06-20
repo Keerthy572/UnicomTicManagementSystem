@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -38,8 +40,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +59,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 557);
             this.panel1.TabIndex = 0;
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(51, 367);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(87, 35);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Create Timetable";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(51, 317);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(87, 35);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "Add TimeSlot";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -139,7 +161,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(268, 27);
+            this.label1.Location = new System.Drawing.Point(344, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 20);
             this.label1.TabIndex = 0;
@@ -153,28 +175,6 @@
             this.mainPanel.Size = new System.Drawing.Size(816, 489);
             this.mainPanel.TabIndex = 2;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(51, 317);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(87, 35);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Add TimeSlot";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(51, 367);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(87, 35);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Create Timetable";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // AdminDashboard
             // 

@@ -50,5 +50,10 @@ namespace UnicomTicManagementSystem.View
             MessageBox.Show("Admin registered Successfully");
             this.Close();
         }
+
+        private void AdminRegisterForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

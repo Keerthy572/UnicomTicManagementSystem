@@ -27,7 +27,6 @@ namespace UnicomTicManagementSystem
         }
 
         public int num;
-        public string usertype;
         private void button1_Click(object sender, EventArgs e)
         {
             User user1 = new User();
@@ -52,8 +51,8 @@ namespace UnicomTicManagementSystem
                 if (item.userName == txtusername.Text &&  item.password == txtpassword.Text)
                 {
                     isAuthenticated = true;
-                    usertype = item.userType;
                     Dashboard.userId = item.userId;
+                    Dashboard.userType = item.userType;
                 }                                    
             }
 
@@ -61,24 +60,33 @@ namespace UnicomTicManagementSystem
             if (isAuthenticated)
             {
                 MessageBox.Show("Login successful");
-                if(usertype == "admin")
+                if(Dashboard.userType == "admin")
                 {
                     this.Hide();
                     var form = new AdminDashboard();
                     form.ShowDialog();
                     this.Close();
                 }
-                else if (usertype == "student")
+                else if (Dashboard.userType == "student")
                 {
-
+                    this.Hide();
+                    var form = new StudentDashboard();
+                    form.ShowDialog();
+                    this.Close();
                 }
-                else if (usertype == "lecturer")
+                else if (Dashboard.userType == "lecturer")
                 {
-
+                    this.Hide();
+                    var form = new LecturerDashboard();
+                    form.ShowDialog();
+                    this.Close();
                 }
-                else if (usertype == "staff")
+                else if (Dashboard.userType == "staff")
                 {
-
+                    this.Hide();
+                    var form = new StaffDashboard();
+                    form.ShowDialog();
+                    this.Close();
                 }
 
             }

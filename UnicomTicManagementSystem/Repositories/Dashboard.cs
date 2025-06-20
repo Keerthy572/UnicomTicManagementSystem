@@ -9,5 +9,6 @@ namespace UnicomTicManagementSystem.Repositories
     public static class Dashboard
     {
         public static int userId;
+        public static string userType;
     }
 }

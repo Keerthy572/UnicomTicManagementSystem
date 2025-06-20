@@ -10,31 +10,60 @@ namespace UnicomTicManagementSystem.Controllers
 {
     internal class MarkController
     {
+        
         public List<Exam> GetExams()
         {
             List<Exam> exams = new List<Exam>();
             using (var con = DataBaseCon.Connection())
             {
-                string query = @"SELECT e.ExamId, e.ExamName, s.SubjectName, s.CourseId, c.CourseName
-                                 FROM Exam e
-                                 JOIN Subjects s ON e.SubjectId = s.SubjectId
-                                 JOIN Course c ON s.CourseId = c.CourseId";
-                SQLiteCommand cmd = new SQLiteCommand(query, con);
-                SQLiteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                string query = "";
+
+                if (Dashboard.userType == "lecturer")
                 {
-                    exams.Add(new Exam
+                    // Restrict to exams related to lecturer's courses
+                    query = @"
+                SELECT e.ExamId, e.ExamName, s.SubjectName, s.CourseId, c.CourseName
+                FROM Exam e
+                JOIN Subjects s ON e.SubjectId = s.SubjectId
+                JOIN Course c ON s.CourseId = c.CourseId
+                JOIN LecturerCourse lc ON c.CourseId = lc.CourseId
+                JOIN Lecturer l ON lc.LecturerId = l.LecturerId
+                WHERE l.UserId = @userId";
+                }
+                else
+                {
+                    // Admins or other users get all exams
+                    query = @"
+                SELECT e.ExamId, e.ExamName, s.SubjectName, s.CourseId, c.CourseName
+                FROM Exam e
+                JOIN Subjects s ON e.SubjectId = s.SubjectId
+                JOIN Course c ON s.CourseId = c.CourseId";
+                }
+
+                using (var cmd = new SQLiteCommand(query, con))
+                {
+                    if (Dashboard.userType == "lecturer")
+                        cmd.Parameters.AddWithValue("@userId", Dashboard.userId);
+
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        examId = Convert.ToInt32(reader["ExamId"]),
-                        examName = reader["ExamName"].ToString(),
-                        subjectName = reader["SubjectName"].ToString(),
-                        courseId = Convert.ToInt32(reader["CourseId"]),
-                        courseName = reader["CourseName"].ToString()
-                    });
+                        while (reader.Read())
+                        {
+                            exams.Add(new Exam
+                            {
+                                examId = Convert.ToInt32(reader["ExamId"]),
+                                examName = reader["ExamName"].ToString(),
+                                subjectName = reader["SubjectName"].ToString(),
+                                courseId = Convert.ToInt32(reader["CourseId"]),
+                                courseName = reader["CourseName"].ToString()
+                            });
+                        }
+                    }
                 }
             }
             return exams;
         }
+
 
         public DataTable GetStudentsWithMarks(int examId)
         {

@@ -121,6 +121,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AdminRegisterForm";
             this.Text = "AdminRegisterForm";
+            this.Load += new System.EventHandler(this.AdminRegisterForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

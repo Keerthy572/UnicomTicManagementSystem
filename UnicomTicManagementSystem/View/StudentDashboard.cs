@@ -163,6 +163,9 @@ namespace UnicomTicManagementSystem.View
             return examMarks;
         }
 
-        
+        private void StudentDashboard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
