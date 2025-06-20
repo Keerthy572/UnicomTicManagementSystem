@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace UnicomTicManagementSystem.Repositories
 {
+    //This class provide SQLite database connections for the application
     internal static class DataBaseCon
     {
+        // Returns an open SQLiteConnection to the UnicomTic.db database.
         public static SQLiteConnection Connection()
         {
             string connectionString = "Data Source = UnicomTic.db; Version = 3;";

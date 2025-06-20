@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace UnicomTicManagementSystem.Repositories
 {
+    // Responsible for initializing all database tables and triggering admin registration if needed.
     internal class DataBaseInitializer
     {
+        // Creates all necessary tables in the database if they don't already exist.
         public void InitializeTable()
         {
             using (SQLiteConnection dbcon = DataBaseCon.Connection())
@@ -169,6 +171,7 @@ namespace UnicomTicManagementSystem.Repositories
             }
         }
 
+        // Launches admin registration form if no user records exist.
         public static void AdminRegistration()
         {
             using (SQLiteConnection conn = DataBaseCon.Connection())

@@ -10,7 +10,7 @@ namespace UnicomTicManagementSystem.Main
     {
         public string ExamName { get; set; }
         public string SubjectName { get; set; }
-        public string Score { get; set; } // Use string so you can show "Absent"
+        public string Score { get; set; } 
     }
 
 }

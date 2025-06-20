@@ -63,7 +63,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(372, 150);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button1
             // 
@@ -131,7 +130,6 @@
             this.Controls.Add(this.label1);
             this.Name = "ManageCourses";
             this.Text = "ManageCourses";
-            this.Load += new System.EventHandler(this.ManageCourses_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

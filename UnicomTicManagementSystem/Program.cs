@@ -10,9 +10,6 @@ namespace UnicomTicManagementSystem
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -20,10 +17,12 @@ namespace UnicomTicManagementSystem
             dataBaseInitializer.InitializeTable();           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            DataBaseInitializer.AdminRegistration();
-            Application.Run(new Form1());
-           
 
+            // Automatically register a default admin user if none exists
+            DataBaseInitializer.AdminRegistration();
+
+            // Start the application with the login form
+            Application.Run(new Form1());
         }
     }
 }

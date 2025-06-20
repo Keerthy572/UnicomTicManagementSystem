@@ -8,6 +8,7 @@ using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Main;
 using UnicomTicManagementSystem.Repositories;
 
+// ... [Namespaces unchanged]
 namespace UnicomTicManagementSystem.View
 {
     public partial class ManageLecturers : Form
@@ -16,7 +17,6 @@ namespace UnicomTicManagementSystem.View
         GroupController groupController = new GroupController();
         Lecturer selectedLecturer = null;
         private Lecturer originalLecturerSnapshot = null;
-
         private AdminDashboard adminDashboard;
 
         public ManageLecturers(AdminDashboard dashboard)
@@ -27,31 +27,56 @@ namespace UnicomTicManagementSystem.View
 
         private void ManageLecturers_Load(object sender, EventArgs e)
         {
-            LoadGroups();
-            LoadLecturers();
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            try
+            {
+                LoadGroups();
+                LoadLecturers();
+                comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during form load: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        // Load groups in Combobox
         private void LoadGroups()
         {
-            GroupController groupController = new GroupController();
-            comboBox1.DataSource = groupController.GetAllGroups();
-            comboBox1.DisplayMember = "groupName";
-            comboBox1.ValueMember = "groupId";
-            comboBox1.SelectedIndex = -1;
+            try
+            {
+                comboBox1.DataSource = groupController.GetAllGroups();
+                comboBox1.DisplayMember = "groupName";
+                comboBox1.ValueMember = "groupId";
+                comboBox1.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load groups: " + ex.Message);
+            }
         }
 
+        //Load lecturers in dataGridView
         private void LoadLecturers()
         {
-            dataGridView1.DataSource = lecturerController.GetLecturers();
-            dataGridView1.Columns["password"].Visible = false;
-            dataGridView1.Columns["courseId"].Visible = false;            
-            dataGridView1.Columns["courseName"].Visible = false;
-            dataGridView1.ReadOnly = true;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            try
+            {
+                var lecturers = lecturerController.GetLecturers();
+                dataGridView1.DataSource = lecturers;
 
+                dataGridView1.Columns["password"].Visible = false;
+                dataGridView1.Columns["courseId"].Visible = false;
+                dataGridView1.Columns["courseName"].Visible = false;
+
+                dataGridView1.ReadOnly = true;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading lecturers: " + ex.Message);
+            }
         }
 
+        //Clear Textboxes and comboboxes after add, update, delete
         private void ClearInputs()
         {
             textBox1.Clear();
@@ -59,140 +84,112 @@ namespace UnicomTicManagementSystem.View
             textBox3.Clear();
             comboBox1.SelectedIndex = -1;
             selectedLecturer = null;
+            originalLecturerSnapshot = null;
         }
 
-        private void button1_Click(object sender, EventArgs e) // Add Lecturer
-        {           
-            // Basic input validation
+        // Adding new lecturers
+        private void button1_Click(object sender, EventArgs e) 
+        {
+            // Input validation
             if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("Enter Lecturer Name.");
-                return;
+                MessageBox.Show("Enter Lecturer Name."); return;
             }
 
             if (string.IsNullOrWhiteSpace(textBox2.Text))
             {
-                MessageBox.Show("Enter Username.");
-                return;
+                MessageBox.Show("Enter Username."); return;
             }
 
             if (string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show("Enter Password.");
-                return;
+                MessageBox.Show("Enter Password."); return;
             }
 
             if (comboBox1.SelectedIndex == -1)
             {
-                MessageBox.Show("Select a group to add lecturer.");
-                return;
+                MessageBox.Show("Select a group."); return;
             }
 
             try
             {
-                // Check if password already exists in User table
-                string passwordToCheck = textBox3.Text.Trim();
-                using (SQLiteConnection con = DataBaseCon.Connection())
-                {
-                    string checkQuery = "SELECT COUNT(*) FROM User WHERE Password = @password";
-                    SQLiteCommand checkCmd = new SQLiteCommand(checkQuery, con);
-                    checkCmd.Parameters.AddWithValue("@password", passwordToCheck);
-                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
-
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Password already exists. Please choose a different one.");
-                        return;
-                    }
-                }
-
-                Lecturer lecturer = new Lecturer
+                // Create and add lecturer
+                var lecturer = new Lecturer
                 {
                     lecturerName = textBox1.Text.Trim(),
                     userName = textBox2.Text.Trim(),
                     password = textBox3.Text.Trim(),
-                    courseId = 0, // No course is selected in this form
+                    courseId = 0,
                     GroupId = Convert.ToInt32(comboBox1.SelectedValue)
                 };
 
                 lecturerController.AddLecturer(lecturer);
-                LoadLecturers(); // Refresh DataGridView
+                LoadLecturers();
                 MessageBox.Show("Lecturer added successfully.");
-                ClearInputs(); // Reset inputs
+                ClearInputs();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error adding lecturer: " + ex.Message);
             }
         }
 
-
-
+        // Load selected row data into form
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {           
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                selectedLecturer = new Lecturer
+                try
                 {
-                    lecturerId = Convert.ToInt32(row.Cells["lecturerId"].Value),
-                    lecturerName = row.Cells["lecturerName"].Value.ToString(),
-                    userName = row.Cells["userName"].Value.ToString(),
-                    password = row.Cells["password"].Value.ToString(),
-                    userId = Convert.ToInt32(row.Cells["userId"].Value),
-                    GroupId = Convert.ToInt32(row.Cells["GroupId"].Value)
-                };
+                    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                    selectedLecturer = new Lecturer
+                    {
+                        lecturerId = Convert.ToInt32(row.Cells["lecturerId"].Value),
+                        lecturerName = row.Cells["lecturerName"].ToString(),
+                        userName = row.Cells["userName"].ToString(),
+                        password = row.Cells["password"].ToString(),
+                        userId = Convert.ToInt32(row.Cells["userId"].Value),
+                        GroupId = Convert.ToInt32(row.Cells["GroupId"].Value)
+                    };
 
-                // Also save a snapshot for comparison on delete
-                originalLecturerSnapshot = new Lecturer
+                    // Snapshot for delete validation
+                    originalLecturerSnapshot = new Lecturer
+                    {
+                        lecturerId = selectedLecturer.lecturerId,
+                        lecturerName = selectedLecturer.lecturerName,
+                        userName = selectedLecturer.userName,
+                        password = selectedLecturer.password,
+                        userId = selectedLecturer.userId,
+                        GroupId = selectedLecturer.GroupId
+                    };
+
+                    textBox1.Text = selectedLecturer.lecturerName;
+                    textBox2.Text = selectedLecturer.userName;
+                    textBox3.Text = selectedLecturer.password;
+                    comboBox1.SelectedValue = selectedLecturer.GroupId;
+                }
+                catch (Exception ex)
                 {
-                    lecturerId = selectedLecturer.lecturerId,
-                    lecturerName = selectedLecturer.lecturerName,
-                    userName = selectedLecturer.userName,
-                    password = selectedLecturer.password,
-                    userId = selectedLecturer.userId,
-                    GroupId = selectedLecturer.GroupId
-                };
-
-                textBox1.Text = selectedLecturer.lecturerName;
-                textBox2.Text = selectedLecturer.userName;
-                textBox3.Text = selectedLecturer.password;
-                comboBox1.SelectedValue = selectedLecturer.GroupId;
+                    MessageBox.Show("Error loading selection: " + ex.Message);
+                }
             }
         }
 
-
-        private void button2_Click(object sender, EventArgs e) // Update
+        // Update an existing lecturer details
+        private void button2_Click(object sender, EventArgs e) 
         {
             if (selectedLecturer == null)
             {
-                MessageBox.Show("Select a lecturer to update.");
-                return;
+                MessageBox.Show("Select a lecturer first."); return;
             }
 
-            // Input validation
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            // Validation
+            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                string.IsNullOrWhiteSpace(textBox2.Text) ||
+                string.IsNullOrWhiteSpace(textBox3.Text) ||
+                comboBox1.SelectedIndex == -1)
             {
-                MessageBox.Show("Enter Lecturer Name.");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(textBox2.Text))
-            {
-                MessageBox.Show("Enter Username.");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(textBox3.Text))
-            {
-                MessageBox.Show("Enter Password.");
-                return;
-            }
-
-            if (comboBox1.SelectedIndex == -1)
-            {
-                MessageBox.Show("Select a group to update lecturer.");
-                return;
+                MessageBox.Show("Please fill all fields."); return;
             }
 
             try
@@ -204,67 +201,74 @@ namespace UnicomTicManagementSystem.View
 
                 lecturerController.UpdateLecturer(selectedLecturer);
                 LoadLecturers();
-                MessageBox.Show("Lecturer updated successfully.");
+                MessageBox.Show("Lecturer updated.");
                 ClearInputs();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Update failed: " + ex.Message);
             }
         }
 
-
-        private void button3_Click(object sender, EventArgs e) // Delete
+        // Delete an existing lecturer details
+        private void button3_Click(object sender, EventArgs e) 
         {
             if (selectedLecturer == null || originalLecturerSnapshot == null)
             {
-                MessageBox.Show("Please select a lecturer to delete.");
-                return;
+                MessageBox.Show("Please select a lecturer to delete."); return;
             }
 
-            // Check if inputs are unchanged from the original selection
-            if (textBox1.Text.Trim() != originalLecturerSnapshot.lecturerName
-                || textBox2.Text.Trim() != originalLecturerSnapshot.userName
-                || textBox3.Text.Trim() != originalLecturerSnapshot.password
-                || (comboBox1.SelectedValue == null || Convert.ToInt32(comboBox1.SelectedValue) != originalLecturerSnapshot.GroupId))
+            // Ensure user hasn't modified values before delete
+            if (textBox1.Text.Trim() != originalLecturerSnapshot.lecturerName ||
+                textBox2.Text.Trim() != originalLecturerSnapshot.userName ||
+                textBox3.Text.Trim() != originalLecturerSnapshot.password ||
+                Convert.ToInt32(comboBox1.SelectedValue) != originalLecturerSnapshot.GroupId)
             {
-                MessageBox.Show("Input fields have been changed since selection. Please do not modify details before deleting.");
-                return;
+                MessageBox.Show("Do not change details before deletion."); return;
             }
 
-            DialogResult confirmResult = MessageBox.Show(
-                $"Are you sure you want to delete lecturer '{selectedLecturer.lecturerName}'?",
-                "Confirm Delete",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
-
-            if (confirmResult == DialogResult.No)
+            if (MessageBox.Show($"Delete lecturer '{selectedLecturer.lecturerName}'?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                return;
+                try
+                {
+                    lecturerController.DeleteLecturer(selectedLecturer.lecturerId, selectedLecturer.userId);
+                    LoadLecturers();
+                    MessageBox.Show("Deleted successfully.");
+                    ClearInputs();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Delete failed: " + ex.Message);
+                }
             }
+        }
 
+        // Load LecturersCourses form in adminpanal to add courses to lecturer
+        private void button4_Click(object sender, EventArgs e)
+        {
             try
             {
-                lecturerController.DeleteLecturer(selectedLecturer.lecturerId, selectedLecturer.userId);
-                LoadLecturers();
-                MessageBox.Show("Lecturer deleted successfully.");
-                ClearInputs();
+                adminDashboard.LoadFormInAdminPanel(new LecturersCourses(adminDashboard));
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Navigation error: " + ex.Message);
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            adminDashboard.LoadFormInAdminPanel(new LecturersCourses(adminDashboard));
-        }
-
+        // Load ManageUsers form in adminpanal
         private void button5_Click(object sender, EventArgs e)
         {
-            adminDashboard.LoadFormInAdminPanel(new ManageUsers(adminDashboard));
-
+            try
+            {
+                adminDashboard.LoadFormInAdminPanel(new ManageUsers(adminDashboard));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Navigation error: " + ex.Message);
+            }
         }
+                
     }
 }
+

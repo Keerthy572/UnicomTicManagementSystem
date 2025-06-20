@@ -11,6 +11,7 @@ namespace UnicomTicManagementSystem.Controllers
 {
     internal class UserController
     {
+        // Get all user details while loging in
         public List<User> LoginCheck()
         {
             List<User> userlist = new List<User>();

@@ -27,6 +27,6 @@ namespace UnicomTicManagementSystem.Main
         public int GroupId { get; set; }
         public string GroupName { get; set; }
 
-        public string Date { get; set; } // Stored as TEXT ("yyyy-MM-dd")
+        public string Date { get; set; } 
     }
 }

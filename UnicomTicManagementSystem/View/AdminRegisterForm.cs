@@ -20,42 +20,54 @@ namespace UnicomTicManagementSystem.View
             InitializeComponent();
         }
 
+        // Handles the Register button click to validate input and insert admin user into database
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
+            try
             {
-                MessageBox.Show("please fill all the fields correctly");
-                return;
-            }
+                // Check if any field is empty
+                if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                    string.IsNullOrWhiteSpace(textBox2.Text) ||
+                    string.IsNullOrWhiteSpace(textBox3.Text))
+                {
+                    MessageBox.Show("Please fill all the fields correctly");
+                    return;
+                }
 
-            if (textBox2.Text != textBox3.Text)
+                // Check if password and confirm password match
+                if (textBox2.Text != textBox3.Text)
+                {
+                    MessageBox.Show("Re-entered password doesn't match the password");
+                    return;
+                }
+
+                User user = new User();
+                user.userName = textBox1.Text;
+                user.password = textBox2.Text;
+
+                // Insert admin user into the User table
+                using (SQLiteConnection con = DataBaseCon.Connection())
+                {
+                    string insertUser = "INSERT INTO User (UserName, Password, UserType) VALUES (@uname, @pwd, 'admin');";
+                    using (SQLiteCommand cmd = new SQLiteCommand(insertUser, con))
+                    {
+                        cmd.Parameters.AddWithValue("@uname", user.userName);
+                        cmd.Parameters.AddWithValue("@pwd", user.password);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Admin registered successfully");
+                this.Close();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Re-entered password doesn't match password");
-                return;
+                MessageBox.Show("Error occurred while registering admin: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            User user = new User();
-            user.userName = textBox1.Text;
-            user.password = textBox2.Text;
-
-            using (SQLiteConnection con = DataBaseCon.Connection())
-            {
-                string insertUser = "INSERT INTO User (UserName, Password, UserType) VALUES (@uname, @pwd, 'admin');";
-                SQLiteCommand cmd = new SQLiteCommand(insertUser, con);
-                cmd.Parameters.AddWithValue("@uname", user.userName);
-                cmd.Parameters.AddWithValue("@pwd", user.password);
-                cmd.ExecuteNonQuery();
-            }
-
-            MessageBox.Show("Admin registered Successfully");
-            this.Close();
         }
 
-        private void AdminRegisterForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        
+        // Handles the Cancel/Exit button to close the application
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();

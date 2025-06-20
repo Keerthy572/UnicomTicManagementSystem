@@ -11,6 +11,7 @@ namespace UnicomTicManagementSystem.Controllers
 {
     internal class StudentController
     {
+        // collect all students from the database
         public List<Student> GetStudents()
         {
             List<Student> studentList = new List<Student>();
@@ -23,158 +24,218 @@ namespace UnicomTicManagementSystem.Controllers
                      JOIN Groups g ON s.GroupId = g.GroupId
                      WHERE u.UserType = 'student';";
 
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                SQLiteCommand cmd = new SQLiteCommand(query, con);
-                SQLiteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SQLiteConnection con = DataBaseCon.Connection())
                 {
-                    studentList.Add(new Student
+                    SQLiteCommand cmd = new SQLiteCommand(query, con);
+                    SQLiteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        studentId = reader.GetInt32(0),
-                        studentName = reader.GetString(1),
-                        courseId = reader.GetInt32(2),
-                        GroupId = reader.GetInt32(3),
-                        userId = reader.GetInt32(4),
-                        userName = reader.GetString(5),
-                        password = reader.GetString(6),
-                        userType = reader.GetString(7),
-                        courseName = reader.GetString(8),
-                        groupName = reader.GetString(9)
-                    });
+                        studentList.Add(new Student
+                        {
+                            studentId = reader.GetInt32(0),
+                            studentName = reader.GetString(1),
+                            courseId = reader.GetInt32(2),
+                            GroupId = reader.GetInt32(3),
+                            userId = reader.GetInt32(4),
+                            userName = reader.GetString(5),
+                            password = reader.GetString(6),
+                            userType = reader.GetString(7),
+                            courseName = reader.GetString(8),
+                            groupName = reader.GetString(9)
+                        });
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while fetching students: " + ex.Message);
             }
 
             return studentList;
         }
 
-        
-
+        // Check if the password is unique (not already in use)
         public bool IsPasswordUnique(string password)
         {
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                string query = "SELECT COUNT(*) FROM User WHERE Password = @Password";
-                SQLiteCommand cmd = new SQLiteCommand(query, con);
-                cmd.Parameters.AddWithValue("@Password", password);
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-                return count == 0;
+                using (SQLiteConnection con = DataBaseCon.Connection())
+                {
+                    string query = "SELECT COUNT(*) FROM User WHERE Password = @Password";
+                    SQLiteCommand cmd = new SQLiteCommand(query, con);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count == 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while checking password uniqueness: " + ex.Message);
             }
         }
 
+        // Add a new student to the database
         public void AddStudent(Student student)
         {
             if (!IsPasswordUnique(student.password))
-                throw new Exception("Password already exists!");
+                throw new Exception("Password already exists!"); // Validate password uniqueness
 
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                SQLiteTransaction transaction = con.BeginTransaction();
+                using (SQLiteConnection con = DataBaseCon.Connection())
+                {
+                    SQLiteTransaction transaction = con.BeginTransaction();
 
-                string insertUser = "INSERT INTO User (UserName, Password, UserType) VALUES (@UserName, @Password, 'student');";
-                SQLiteCommand cmdUser = new SQLiteCommand(insertUser, con);
-                cmdUser.Parameters.AddWithValue("@UserName", student.userName);
-                cmdUser.Parameters.AddWithValue("@Password", student.password);
-                cmdUser.ExecuteNonQuery();
+                    // Insert User record
+                    string insertUser = "INSERT INTO User (UserName, Password, UserType) VALUES (@UserName, @Password, 'student');";
+                    SQLiteCommand cmdUser = new SQLiteCommand(insertUser, con);
+                    cmdUser.Parameters.AddWithValue("@UserName", student.userName);
+                    cmdUser.Parameters.AddWithValue("@Password", student.password);
+                    cmdUser.ExecuteNonQuery();
 
-                long userId = con.LastInsertRowId;
+                    // Get the last inserted UserId
+                    long userId = con.LastInsertRowId;
 
-                string insertStudent = "INSERT INTO Student (StudentName, UserId, CourseId, GroupId) VALUES (@StudentName, @UserId, @CourseId, @GroupId);";
-                SQLiteCommand cmdStudent = new SQLiteCommand(insertStudent, con);
-                cmdStudent.Parameters.AddWithValue("@StudentName", student.studentName);
-                cmdStudent.Parameters.AddWithValue("@UserId", userId);
-                cmdStudent.Parameters.AddWithValue("@CourseId", student.courseId);
-                cmdStudent.Parameters.AddWithValue("@GroupId", student.GroupId);
-                cmdStudent.ExecuteNonQuery();
+                    // Insert Student record
+                    string insertStudent = "INSERT INTO Student (StudentName, UserId, CourseId, GroupId) VALUES (@StudentName, @UserId, @CourseId, @GroupId);";
+                    SQLiteCommand cmdStudent = new SQLiteCommand(insertStudent, con);
+                    cmdStudent.Parameters.AddWithValue("@StudentName", student.studentName);
+                    cmdStudent.Parameters.AddWithValue("@UserId", userId);
+                    cmdStudent.Parameters.AddWithValue("@CourseId", student.courseId);
+                    cmdStudent.Parameters.AddWithValue("@GroupId", student.GroupId);
+                    cmdStudent.ExecuteNonQuery();
 
-                transaction.Commit();
+                    transaction.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while adding student: " + ex.Message);
             }
         }
 
+        // Update an existing student record
         public void UpdateStudent(Student student)
         {
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                SQLiteTransaction transaction = con.BeginTransaction();
+                using (SQLiteConnection con = DataBaseCon.Connection())
+                {
+                    SQLiteTransaction transaction = con.BeginTransaction();
 
-                string updateUser = "UPDATE User SET UserName = @UserName, Password = @Password WHERE UserId = @UserId;";
-                SQLiteCommand cmdUser = new SQLiteCommand(updateUser, con);
-                cmdUser.Parameters.AddWithValue("@UserName", student.userName);
-                cmdUser.Parameters.AddWithValue("@Password", student.password);
-                cmdUser.Parameters.AddWithValue("@UserId", student.userId);
-                cmdUser.ExecuteNonQuery();
+                    // Update User record
+                    string updateUser = "UPDATE User SET UserName = @UserName, Password = @Password WHERE UserId = @UserId;";
+                    SQLiteCommand cmdUser = new SQLiteCommand(updateUser, con);
+                    cmdUser.Parameters.AddWithValue("@UserName", student.userName);
+                    cmdUser.Parameters.AddWithValue("@Password", student.password);
+                    cmdUser.Parameters.AddWithValue("@UserId", student.userId);
+                    cmdUser.ExecuteNonQuery();
 
-                string updateStudent = "UPDATE Student SET StudentName = @StudentName, CourseId = @CourseId, GroupId = @GroupId WHERE StudentId = @StudentId;";
-                SQLiteCommand cmdStudent = new SQLiteCommand(updateStudent, con);
-                cmdStudent.Parameters.AddWithValue("@StudentName", student.studentName);
-                cmdStudent.Parameters.AddWithValue("@CourseId", student.courseId);
-                cmdStudent.Parameters.AddWithValue("@GroupId", student.GroupId);
-                cmdStudent.Parameters.AddWithValue("@StudentId", student.studentId);
-                cmdStudent.ExecuteNonQuery();
+                    // Update Student record
+                    string updateStudent = "UPDATE Student SET StudentName = @StudentName, CourseId = @CourseId, GroupId = @GroupId WHERE StudentId = @StudentId;";
+                    SQLiteCommand cmdStudent = new SQLiteCommand(updateStudent, con);
+                    cmdStudent.Parameters.AddWithValue("@StudentName", student.studentName);
+                    cmdStudent.Parameters.AddWithValue("@CourseId", student.courseId);
+                    cmdStudent.Parameters.AddWithValue("@GroupId", student.GroupId);
+                    cmdStudent.Parameters.AddWithValue("@StudentId", student.studentId);
+                    cmdStudent.ExecuteNonQuery();
 
-                transaction.Commit();
+                    transaction.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while updating student: " + ex.Message);
             }
         }
 
+        // Delete a student record from the database
         public void DeleteStudent(int studentId, int userId)
         {
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                SQLiteTransaction transaction = con.BeginTransaction();
+                using (SQLiteConnection con = DataBaseCon.Connection())
+                {
+                    SQLiteTransaction transaction = con.BeginTransaction();
 
-                SQLiteCommand cmdStudent = new SQLiteCommand("DELETE FROM Student WHERE StudentId = @StudentId", con);
-                cmdStudent.Parameters.AddWithValue("@StudentId", studentId);
-                cmdStudent.ExecuteNonQuery();
+                    // Delete Student record
+                    SQLiteCommand cmdStudent = new SQLiteCommand("DELETE FROM Student WHERE StudentId = @StudentId", con);
+                    cmdStudent.Parameters.AddWithValue("@StudentId", studentId);
+                    cmdStudent.ExecuteNonQuery();
 
-                SQLiteCommand cmdUser = new SQLiteCommand("DELETE FROM User WHERE UserId = @UserId", con);
-                cmdUser.Parameters.AddWithValue("@UserId", userId);
-                cmdUser.ExecuteNonQuery();
+                    // Delete User record
+                    SQLiteCommand cmdUser = new SQLiteCommand("DELETE FROM User WHERE UserId = @UserId", con);
+                    cmdUser.Parameters.AddWithValue("@UserId", userId);
+                    cmdUser.ExecuteNonQuery();
 
-                transaction.Commit();
+                    transaction.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while deleting student: " + ex.Message);
             }
         }
 
+        // Get the list of all available courses
         public List<Course> GetCourses()
         {
             List<Course> courses = new List<Course>();
             string query = "SELECT CourseId, CourseName FROM Course";
 
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                SQLiteCommand cmd = new SQLiteCommand(query, con);
-                SQLiteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SQLiteConnection con = DataBaseCon.Connection())
                 {
-                    courses.Add(new Course
+                    SQLiteCommand cmd = new SQLiteCommand(query, con);
+                    SQLiteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        courseId = reader.GetInt32(0),
-                        courseName = reader.GetString(1)
-                    });
+                        courses.Add(new Course
+                        {
+                            courseId = reader.GetInt32(0),
+                            courseName = reader.GetString(1)
+                        });
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while fetching courses: " + ex.Message);
             }
             return courses;
         }
 
+        // Get the list all available groups
         public List<Group> GetGroups()
         {
             List<Group> groups = new List<Group>();
             string query = "SELECT GroupId, GroupName FROM Groups";
 
-            using (SQLiteConnection con = DataBaseCon.Connection())
+            try
             {
-                SQLiteCommand cmd = new SQLiteCommand(query, con);
-                SQLiteDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SQLiteConnection con = DataBaseCon.Connection())
                 {
-                    groups.Add(new Group
+                    SQLiteCommand cmd = new SQLiteCommand(query, con);
+                    SQLiteDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        groupId = reader.GetInt32(0),
-                        groupName = reader.GetString(1)
-                    });
+                        groups.Add(new Group
+                        {
+                            groupId = reader.GetInt32(0),
+                            groupName = reader.GetString(1)
+                        });
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while fetching groups: " + ex.Message);
+            }
+
             return groups;
         }
-
     }
 }

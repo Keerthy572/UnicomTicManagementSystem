@@ -85,7 +85,6 @@
             this.Controls.Add(this.button1);
             this.Name = "ManageUsers";
             this.Text = "ManageUsers";
-            this.Load += new System.EventHandler(this.ManageUsers_Load);
             this.ResumeLayout(false);
 
         }

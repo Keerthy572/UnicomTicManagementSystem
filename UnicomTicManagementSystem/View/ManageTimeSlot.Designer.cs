@@ -139,7 +139,6 @@
             this.Controls.Add(this.dtStart);
             this.Name = "ManageTimeSlot";
             this.Text = "ManageTimeSlot";
-            this.Load += new System.EventHandler(this.ManageTimeSlot_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTimeSlots)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

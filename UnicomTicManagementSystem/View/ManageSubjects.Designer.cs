@@ -47,7 +47,6 @@
             this.comboBoxCourses.Name = "comboBoxCourses";
             this.comboBoxCourses.Size = new System.Drawing.Size(226, 21);
             this.comboBoxCourses.TabIndex = 0;
-            this.comboBoxCourses.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -85,7 +84,6 @@
             this.textBoxSubjectName.Name = "textBoxSubjectName";
             this.textBoxSubjectName.Size = new System.Drawing.Size(226, 20);
             this.textBoxSubjectName.TabIndex = 4;
-            this.textBoxSubjectName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button2
             // 
@@ -105,7 +103,6 @@
             this.dataGridViewSubjects.Size = new System.Drawing.Size(341, 197);
             this.dataGridViewSubjects.TabIndex = 6;
             this.dataGridViewSubjects.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubjects_CellClick_1);
-            this.dataGridViewSubjects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubjects_CellContentClick);
             // 
             // button3
             // 

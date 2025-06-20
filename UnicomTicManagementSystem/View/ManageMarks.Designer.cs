@@ -106,7 +106,6 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "ManageMarks";
             this.Text = "ManageMarks";
-            this.Load += new System.EventHandler(this.ManageMarks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

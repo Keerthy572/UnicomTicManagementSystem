@@ -176,7 +176,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(816, 489);
             this.mainPanel.TabIndex = 2;
-            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
             // button9
             // 
@@ -199,7 +198,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "AdminDashboard";
             this.Text = "AdminDashboard";
-            this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
