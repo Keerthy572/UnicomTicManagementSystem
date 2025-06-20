@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Forms;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 
 namespace UnicomTicManagementSystem.View
 {

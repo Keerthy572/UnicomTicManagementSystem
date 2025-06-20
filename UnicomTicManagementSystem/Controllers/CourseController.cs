@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
 namespace UnicomTicManagementSystem.Controllers

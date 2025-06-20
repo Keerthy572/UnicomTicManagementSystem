@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.View;
 
 namespace UnicomTicManagementSystem.View

@@ -70,19 +70,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main\Course.cs" />
-    <Compile Include="Main\Exam.cs" />
-    <Compile Include="Main\ExamMark.cs" />
-    <Compile Include="Main\Group.cs" />
-    <Compile Include="Main\Lecturer.cs" />
-    <Compile Include="Main\LecturerCourse.cs" />
-    <Compile Include="Main\Room.cs" />
-    <Compile Include="Main\Staff.cs" />
-    <Compile Include="Main\Student.cs" />
-    <Compile Include="Main\Subject.cs" />
-    <Compile Include="Main\TimeSlot.cs" />
-    <Compile Include="Main\Timetable.cs" />
-    <Compile Include="Main\User.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\ExamMark.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Lecturer.cs" />
+    <Compile Include="Models\LecturerCourse.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\TimeSlot.cs" />
+    <Compile Include="Models\Timetable.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Dashboard.cs" />

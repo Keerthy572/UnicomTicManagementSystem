@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
 namespace UnicomTicManagementSystem.Controllers

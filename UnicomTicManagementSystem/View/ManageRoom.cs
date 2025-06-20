@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 
 namespace UnicomTicManagementSystem.Forms
 {

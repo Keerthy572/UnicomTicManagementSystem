@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UnicomTicManagementSystem.Forms

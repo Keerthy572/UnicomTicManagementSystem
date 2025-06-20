@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.View;
 
 namespace UnicomTicManagementSystem.Views

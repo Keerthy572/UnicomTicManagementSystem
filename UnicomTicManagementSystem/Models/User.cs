@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnicomTicManagementSystem.Main
+namespace UnicomTicManagementSystem.Models
 {
-    internal class Staff
+    internal class User
     {
-        public int staffId { get; set; }
-        public string staffName { get; set; }
-        public int userId { get; set; }
+        public int userId {  get; set; }
         public string userName { get; set; }
         public string password { get; set; }
-
-
+        public string userType { get; set; }
     }
 }

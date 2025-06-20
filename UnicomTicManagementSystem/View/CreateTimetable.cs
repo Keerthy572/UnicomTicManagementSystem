@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Controllers;
 using static System.Windows.Forms.AxHost;
 

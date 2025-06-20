@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Main;
+using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
 // ... [Namespaces unchanged]
