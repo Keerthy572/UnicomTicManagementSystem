@@ -22,8 +22,7 @@ namespace UnicomTicManagementSystem
             Application.SetCompatibleTextRenderingDefault(false);
             DataBaseInitializer.AdminRegistration();
             Application.Run(new Form1());
-            //Application.Run(new AdminDashboard());
-            //Application.Run(new LecturerDashboard());
+           
 
         }
     }

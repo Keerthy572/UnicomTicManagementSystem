@@ -154,5 +154,10 @@ namespace UnicomTicManagementSystem.Views
             selectedStaffId = 0;
             selectedUserId = 0;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            adminDashboard.LoadFormInAdminPanel(new ManageUsers(adminDashboard));
+        }
     }
 }

@@ -36,6 +36,7 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvTimeSlots = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTimeSlots)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,11 +113,22 @@
             this.dgvTimeSlots.TabIndex = 7;
             this.dgvTimeSlots.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTimeSlots_CellClick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(677, 367);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Back";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ManageTimeSlot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvTimeSlots);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
@@ -144,5 +156,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvTimeSlots;
+        private System.Windows.Forms.Button button1;
     }
 }

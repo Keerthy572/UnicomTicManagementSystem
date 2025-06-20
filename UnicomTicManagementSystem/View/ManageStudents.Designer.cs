@@ -42,6 +42,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,11 +170,22 @@
             this.comboBox2.Size = new System.Drawing.Size(175, 21);
             this.comboBox2.TabIndex = 13;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(679, 372);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "Back";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // ManageStudents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dataGridView1);
@@ -213,5 +225,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button4;
     }
 }

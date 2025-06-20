@@ -40,5 +40,10 @@ namespace UnicomTicManagementSystem.View
             adminDashboard.LoadFormInAdminPanel(new ManageStaff(adminDashboard));
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -260,5 +260,11 @@ namespace UnicomTicManagementSystem.View
         {
             adminDashboard.LoadFormInAdminPanel(new LecturersCourses(adminDashboard));
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            adminDashboard.LoadFormInAdminPanel(new ManageUsers(adminDashboard));
+
+        }
     }
 }

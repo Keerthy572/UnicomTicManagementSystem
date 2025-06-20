@@ -38,6 +38,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBoxCourse = new System.Windows.Forms.ComboBox();
             this.comboBoxSubject = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,11 +132,22 @@
             this.comboBoxSubject.Size = new System.Drawing.Size(208, 21);
             this.comboBoxSubject.TabIndex = 11;
             // 
-            // ManageExam
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(680, 375);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Back";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ManageExams
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxSubject);
             this.Controls.Add(this.comboBoxCourse);
             this.Controls.Add(this.dataGridView1);
@@ -146,7 +158,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "ManageExam";
+            this.Name = "ManageExams";
             this.Text = "ManageExams";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -165,5 +177,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBoxCourse;
         private System.Windows.Forms.ComboBox comboBoxSubject;
+        private System.Windows.Forms.Button button1;
     }
 }

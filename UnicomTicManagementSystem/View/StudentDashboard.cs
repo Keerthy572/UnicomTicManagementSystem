@@ -167,5 +167,13 @@ namespace UnicomTicManagementSystem.View
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form = new Form1();
+            form.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -96,5 +96,13 @@ namespace UnicomTicManagementSystem.View
             panel3.Controls.Add(manageMarks);
             manageMarks.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form = new Form1();
+            form.ShowDialog();
+            this.Close();
+        }
     }
 }

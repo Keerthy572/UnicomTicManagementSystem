@@ -40,12 +40,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.button9 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.button8);
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
@@ -176,6 +178,17 @@
             this.mainPanel.TabIndex = 2;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.Location = new System.Drawing.Point(51, 423);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(87, 35);
+            this.button9.TabIndex = 8;
+            this.button9.Text = "Logout";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // AdminDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,5 +221,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }

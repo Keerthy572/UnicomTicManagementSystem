@@ -82,5 +82,13 @@ namespace UnicomTicManagementSystem.View
             LoadFormInAdminPanel(new CreateTimetable());
 
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form = new Form1();
+            form.ShowDialog();               
+            this.Close();
+        }
     }
 }

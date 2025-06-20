@@ -114,5 +114,10 @@ namespace UnicomTicManagementSystem.Forms
             comboBox1.SelectedIndex = -1;
             selectedRoomId = 0;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

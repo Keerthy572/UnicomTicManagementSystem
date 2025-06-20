@@ -20,12 +20,7 @@ namespace UnicomTicManagementSystem
         {
             InitializeComponent();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
+                
         public int num;
         private void button1_Click(object sender, EventArgs e)
         {
@@ -94,6 +89,11 @@ namespace UnicomTicManagementSystem
             {
                 MessageBox.Show("Invalid Login");
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
