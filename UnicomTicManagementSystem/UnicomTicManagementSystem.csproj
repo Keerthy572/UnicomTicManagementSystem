@@ -56,7 +56,6 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\LecturerController.cs" />
     <Compile Include="Controllers\LecturerCourseController.cs" />
-    <Compile Include="Controllers\LecturerStudentController.cs" />
     <Compile Include="Controllers\MarkController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
@@ -76,9 +75,7 @@
     <Compile Include="Main\ExamMark.cs" />
     <Compile Include="Main\Group.cs" />
     <Compile Include="Main\Lecturer.cs" />
-    <Compile Include="Main\GroupStudent.cs" />
     <Compile Include="Main\LecturerCourse.cs" />
-    <Compile Include="Main\Mark.cs" />
     <Compile Include="Main\Room.cs" />
     <Compile Include="Main\Staff.cs" />
     <Compile Include="Main\Student.cs" />
@@ -187,12 +184,6 @@
     <Compile Include="View\ManageUsers.Designer.cs">
       <DependentUpon>ManageUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageTimetable.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ManageTimetable.Designer.cs">
-      <DependentUpon>ManageTimetable.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\StaffDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,9 +255,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ManageUsers.resx">
       <DependentUpon>ManageUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ManageTimetable.resx">
-      <DependentUpon>ManageTimetable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\StaffDashboard.resx">
       <DependentUpon>StaffDashboard.cs</DependentUpon>

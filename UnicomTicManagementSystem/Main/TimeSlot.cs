@@ -12,7 +12,7 @@ namespace UnicomTicManagementSystem.Main
         public string StartTime { get; set; }
         public string EndTime { get; set; }
 
-        public string DisplayTime => $"{StartTime} - {EndTime}"; 
+        
     }
 
 

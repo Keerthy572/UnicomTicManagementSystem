@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Main;
 using UnicomTicManagementSystem.Repositories;
 
@@ -236,6 +237,87 @@ namespace UnicomTicManagementSystem.Controllers
             }
 
             return groups;
+        }
+
+        // Retrieves student profile info for current user
+        public List<Student> GetStudentsForGrid()
+        {
+            List<Student> st = new List<Student>();
+
+            try
+            {
+                StudentController studentController = new StudentController();
+                List<Student> studentList = studentController.GetStudents();
+
+                foreach (Student student in studentList)
+                {
+                    if (student.userId == Dashboard.userId)
+                    {
+                        st.Add(new Student
+                        {
+                            studentId = student.studentId,
+                            studentName = student.studentName,
+                            userName = student.userName,
+                            password = student.password,
+                            courseName = student.courseName,
+                            groupName = student.groupName,
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load student info: " + ex.Message);
+            }
+
+            return st;
+        }
+
+        // Retrieves exam marks for current student
+        public List<ExamMark> GetExamMarks()
+        {
+            List<ExamMark> examMarks = new List<ExamMark>();
+
+            try
+            {
+                using (var con = DataBaseCon.Connection())
+                {
+                    string query = @"
+                        SELECT e.ExamName, s.SubjectName, m.Score
+                        FROM Marks m
+                        JOIN Exam e ON m.ExamId = e.ExamId
+                        JOIN Subjects s ON e.SubjectId = s.SubjectId
+                        JOIN Student st ON m.StudentId = st.StudentId
+                        WHERE st.UserId = @userId;
+                    ";
+
+                    using (var cmd = new SQLiteCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", Dashboard.userId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string score = reader["Score"] == DBNull.Value ? "Absent" : reader["Score"].ToString();
+
+                                examMarks.Add(new ExamMark
+                                {
+                                    ExamName = reader["ExamName"].ToString(),
+                                    SubjectName = reader["SubjectName"].ToString(),
+                                    Score = score
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to retrieve exam marks: " + ex.Message);
+            }
+
+            return examMarks;
         }
     }
 }
