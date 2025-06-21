@@ -139,6 +139,11 @@ namespace UnicomTicManagementSystem.Forms
         {
             try
             {
+                if (comboBoxCourse.Items.Count == 0 || comboBoxSubject.Items.Count == 0)
+                {
+                    MessageBox.Show("Courses or Subjects aren't created yet. Courses and Subjects have to be created  to add exam ");
+                    return;
+                }                
                 if (string.IsNullOrWhiteSpace(textBoxExamName.Text))
                     throw new Exception("Please enter exam name.");
 

@@ -113,9 +113,35 @@ namespace UnicomTicManagementSystem.View
         // Add new student
         private void button1_Click(object sender, EventArgs e)
         {
+            if (comboBox1.Items.Count == 0)
+            {
+                MessageBox.Show("First create courses to add Students");
+                return;
+            }
+            if (comboBox2.Items.Count == 0)
+            {
+                MessageBox.Show("First create groups to add Students");
+                return;
+            }            
+
             if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show("please fill all the fields correctly");
+                MessageBox.Show("please fill all the fields correctly.");
+                return;
+            }
+            if (!textBox1.Text.Trim().All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("Student name must contain only letters and spaces.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox2.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Username must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox3.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Password must be at least 6 characters long.Spaces before and after text you enter will be removed");
                 return;
             }
             if (comboBox1.SelectedIndex == -1 || comboBox2.SelectedIndex == -1)
@@ -123,13 +149,16 @@ namespace UnicomTicManagementSystem.View
                 MessageBox.Show("Select course and group to add student");
                 return;
             }
+            
+
+
             try
             {
                 Student student = new Student
                 {
-                    studentName = textBox1.Text,
-                    userName = textBox2.Text,
-                    password = textBox3.Text,
+                    studentName = textBox1.Text.Trim(),
+                    userName = textBox2.Text.Trim(),
+                    password = textBox3.Text.Trim(),
                     courseId = Convert.ToInt32(comboBox1.SelectedValue),
                     GroupId = Convert.ToInt32(comboBox2.SelectedValue)
                 };
@@ -150,7 +179,22 @@ namespace UnicomTicManagementSystem.View
         {
             if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show("please fill all the fields correctly");
+                MessageBox.Show("please fill all the fields correctly.");
+                return;
+            }
+            if (!textBox1.Text.Trim().All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("Student name must contain only letters and spaces.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox2.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Username must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox3.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Password must be at least 6 characters long.Spaces before and after text you enter will be removed");
                 return;
             }
 
@@ -165,9 +209,9 @@ namespace UnicomTicManagementSystem.View
                 {
                     studentId = selectedStudentId,
                     userId = selectedUserId,
-                    studentName = textBox1.Text,
-                    userName = textBox2.Text,
-                    password = textBox3.Text,
+                    studentName = textBox1.Text.Trim(),
+                    userName = textBox2.Text.Trim(),
+                    password = textBox3.Text.Trim(),
                     courseId = Convert.ToInt32(comboBox1.SelectedValue),
                     GroupId = Convert.ToInt32(comboBox2.SelectedValue)
                 };

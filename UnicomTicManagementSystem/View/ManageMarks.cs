@@ -75,6 +75,11 @@ namespace UnicomTicManagementSystem.View
         {
             try
             {
+                if (comboBox1.Items.Count == 0 )
+                {
+                    MessageBox.Show(" Exams have to be created to add or update marks ");
+                    return;
+                }
                 if (comboBox1.SelectedValue is int examId)
                 {
                     markController.AddOrUpdateMarks(examId, dataGridView1);

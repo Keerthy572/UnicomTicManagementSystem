@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Models;
@@ -161,6 +162,22 @@ namespace UnicomTicManagementSystem.Views
             if (string.IsNullOrWhiteSpace(textBox3.Text))
             {
                 MessageBox.Show("Please enter password.");
+                return false;
+            }
+            
+            if (!textBox1.Text.Trim().All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("Staff name must contain only letters and spaces.Spaces before and after text you enter will be removed");
+                return false;
+            }
+            if (textBox2.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Username must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return false;
+            }
+            if (textBox3.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Password must be at least 6 characters long.Spaces before and after text you enter will be removed");
                 return false;
             }
 

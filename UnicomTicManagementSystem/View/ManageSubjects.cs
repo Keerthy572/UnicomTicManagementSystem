@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UnicomTicManagementSystem.View
 {
@@ -82,6 +83,11 @@ namespace UnicomTicManagementSystem.View
         {
             try
             {
+                if (comboBoxCourses.Items.Count == 0)
+                {
+                    MessageBox.Show("First create courses to add subjects to courses");
+                    return;
+                }
                 if (comboBoxCourses.SelectedIndex == -1)
                 {
                     MessageBox.Show("Select a course to add subject.");

@@ -89,6 +89,16 @@ namespace UnicomTicManagementSystem.View
         {
             try
             {
+                if (comboBox1.Items.Count == 0)
+                {
+                    MessageBox.Show("First Create Lecturers to assign courses to lecturers");
+                    return;
+                }
+                if (comboBox2.Items.Count == 0)
+                {
+                    MessageBox.Show("First Create Courses to assign courses to lecturers");
+                    return;
+                }
                 if (comboBox1.SelectedIndex == -1 || comboBox2.SelectedIndex == -1)
                 {
                     MessageBox.Show("Select a lecturer and course to add.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);

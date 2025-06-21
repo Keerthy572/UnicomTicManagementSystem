@@ -193,6 +193,11 @@ namespace UnicomTicManagementSystem.View
         {
             try
             {
+                if (comboBox1.Items.Count == 0 || comboBox2.Items.Count == 0 || comboBox3.Items.Count == 0 || comboBox4.Items.Count == 0 || comboBox5.Items.Count == 0 )
+                {
+                    MessageBox.Show(" Timeslots , groups , lecturers , subjects and rooms have to be created to add timetable");
+                    return;
+                }
                 // Validate ComboBox selections
                 if (comboBox1.SelectedIndex == -1 ||
                     comboBox2.SelectedIndex == -1 ||

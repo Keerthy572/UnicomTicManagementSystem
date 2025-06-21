@@ -91,19 +91,31 @@ namespace UnicomTicManagementSystem.View
         private void button1_Click(object sender, EventArgs e) 
         {
             // Input validation
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            if (comboBox1.Items.Count == 0)
             {
-                MessageBox.Show("Enter Lecturer Name."); return;
+                MessageBox.Show("First create groups to add Lecturers");
+                return;
             }
-
-            if (string.IsNullOrWhiteSpace(textBox2.Text))
+            
+            if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show("Enter Username."); return;
+                MessageBox.Show("please fill all the fields correctly.");
+                return;
             }
-
-            if (string.IsNullOrWhiteSpace(textBox3.Text))
+            if (!textBox1.Text.Trim().All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
             {
-                MessageBox.Show("Enter Password."); return;
+                MessageBox.Show("Lecturer name must contain only letters and spaces.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox2.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Username must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox3.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Password must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return;
             }
 
             if (comboBox1.SelectedIndex == -1)
@@ -136,18 +148,19 @@ namespace UnicomTicManagementSystem.View
 
         // Load selected row data into form
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {           
+        {
             if (e.RowIndex >= 0)
             {
                 try
                 {
                     DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
                     selectedLecturer = new Lecturer
                     {
                         lecturerId = Convert.ToInt32(row.Cells["lecturerId"].Value),
-                        lecturerName = row.Cells["lecturerName"].ToString(),
-                        userName = row.Cells["userName"].ToString(),
-                        password = row.Cells["password"].ToString(),
+                        lecturerName = row.Cells["lecturerName"].Value?.ToString(),
+                        userName = row.Cells["userName"].Value?.ToString(),
+                        password = row.Cells["password"].Value?.ToString(),
                         userId = Convert.ToInt32(row.Cells["userId"].Value),
                         GroupId = Convert.ToInt32(row.Cells["GroupId"].Value)
                     };
@@ -163,6 +176,7 @@ namespace UnicomTicManagementSystem.View
                         GroupId = selectedLecturer.GroupId
                     };
 
+                    // Populate form fields
                     textBox1.Text = selectedLecturer.lecturerName;
                     textBox2.Text = selectedLecturer.userName;
                     textBox3.Text = selectedLecturer.password;
@@ -175,6 +189,7 @@ namespace UnicomTicManagementSystem.View
             }
         }
 
+
         // Update an existing lecturer details
         private void button2_Click(object sender, EventArgs e) 
         {
@@ -184,12 +199,25 @@ namespace UnicomTicManagementSystem.View
             }
 
             // Validation
-            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
-                string.IsNullOrWhiteSpace(textBox2.Text) ||
-                string.IsNullOrWhiteSpace(textBox3.Text) ||
-                comboBox1.SelectedIndex == -1)
+            if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show("Please fill all fields."); return;
+                MessageBox.Show("please fill all the fields correctly.");
+                return;
+            }
+            if (!textBox1.Text.Trim().All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("Lecturer name must contain only letters and spaces.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox2.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Username must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return;
+            }
+            if (textBox3.Text.Trim().Length < 6)
+            {
+                MessageBox.Show("Password must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                return;
             }
 
             try

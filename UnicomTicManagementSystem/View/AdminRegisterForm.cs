@@ -34,6 +34,18 @@ namespace UnicomTicManagementSystem.View
                     return;
                 }
 
+                if (textBox1.Text.Trim().Length < 6)
+                {
+                    MessageBox.Show("Username must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                    return;
+                }
+                if (textBox2.Text.Trim().Length < 6)
+                {
+                    MessageBox.Show("Password must be at least 6 characters long.Spaces before and after text you enter will be removed");
+                    return;
+                }
+
+
                 // Check if password and confirm password match
                 if (textBox2.Text != textBox3.Text)
                 {
@@ -42,8 +54,8 @@ namespace UnicomTicManagementSystem.View
                 }
 
                 User user = new User();
-                user.userName = textBox1.Text;
-                user.password = textBox2.Text;
+                user.userName = textBox1.Text.Trim();
+                user.password = textBox2.Text.Trim();
 
                 // Insert admin user into the User table
                 using (SQLiteConnection con = DataBaseCon.Connection())
