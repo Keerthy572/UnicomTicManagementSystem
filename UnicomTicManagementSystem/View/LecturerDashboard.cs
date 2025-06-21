@@ -120,7 +120,7 @@ namespace UnicomTicManagementSystem.View
             try
             {
                 this.Hide();
-                var form = new Form1();
+                var form = new LoginForm();
                 form.ShowDialog();
                 this.Close();
             }

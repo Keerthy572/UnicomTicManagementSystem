@@ -22,7 +22,7 @@ namespace UnicomTicManagementSystem
             DataBaseInitializer.AdminRegistration();
 
             // Start the application with the login form
-            Application.Run(new Form1());
+            Application.Run(new LoginForm());
         }
     }
 }
