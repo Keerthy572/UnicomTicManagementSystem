@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -48,7 +50,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to retrieve exams. " + ex.Message);
+                MessageBox.Show("Failed to retrieve exams. " + ex.Message);
             }
 
             return exams;
@@ -78,7 +80,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to load courses. " + ex.Message);
+                MessageBox.Show("Failed to load courses. " + ex.Message);
             }
 
             return courses;
@@ -109,7 +111,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to load subjects for the course. " + ex.Message);
+                MessageBox.Show("Failed to load subjects for the course. " + ex.Message);
             }
 
             return subjects;
@@ -119,7 +121,11 @@ namespace UnicomTicManagementSystem.Controllers
         public void AddExam(string examName, int subjectId)
         {
             if (string.IsNullOrWhiteSpace(examName))
-                throw new Exception("Exam name cannot be empty.");
+            {
+                MessageBox.Show("Exam name cannot be empty.");
+                return;
+            }
+                
 
             try
             {
@@ -136,7 +142,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to add exam. " + ex.Message);
+                MessageBox.Show("Failed to add exam. " + ex.Message);
             }
         }
 
@@ -144,9 +150,17 @@ namespace UnicomTicManagementSystem.Controllers
         public void UpdateExam(int examId, string examName, int subjectId)
         {
             if (examId <= 0)
-                throw new Exception("Invalid exam selected.");
+            {
+                MessageBox.Show("Invalid exam selected.");
+                return;
+            }
+                
             if (string.IsNullOrWhiteSpace(examName))
-                throw new Exception("Exam name cannot be empty.");
+            {
+                MessageBox.Show("Exam name cannot be empty.");
+                return;
+            }
+                
 
             try
             {
@@ -164,7 +178,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to update exam. " + ex.Message);
+                MessageBox.Show("Failed to update exam. " + ex.Message);
             }
         }
 
@@ -172,7 +186,11 @@ namespace UnicomTicManagementSystem.Controllers
         public void DeleteExam(int examId)
         {
             if (examId <= 0)
-                throw new Exception("Invalid exam selected.");
+            {
+                MessageBox.Show("Invalid exam selected.");
+                return;
+            }
+                
 
             try
             {
@@ -188,7 +206,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to delete exam. " + ex.Message);
+                MessageBox.Show("Failed to delete exam. " + ex.Message);
             }
         }
 
@@ -217,7 +235,8 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to check if exam exists. " + ex.Message);
+                MessageBox.Show("Failed to check if exam exists. " + ex.Message);
+                return false;
             }
         }
     }

@@ -114,8 +114,27 @@ namespace UnicomTicManagementSystem.View
             }
         }
 
-        // Button4 click: Logs out and returns to login screen
+        
         private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MarkAttendance markAttendance = new MarkAttendance();
+                panel3.Controls.Clear();
+                markAttendance.TopLevel = false;
+                markAttendance.FormBorderStyle = FormBorderStyle.None;
+                markAttendance.Dock = DockStyle.Fill;
+                panel3.Controls.Add(markAttendance);
+                markAttendance.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading marks module: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Button5 click: Logs out and returns to login screen
+        private void button5_Click(object sender, EventArgs e)
         {
             try
             {

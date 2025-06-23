@@ -145,16 +145,27 @@ namespace UnicomTicManagementSystem.Forms
                     return;
                 }                
                 if (string.IsNullOrWhiteSpace(textBoxExamName.Text))
-                    throw new Exception("Please enter exam name.");
+                {
+                    MessageBox.Show("Please enter exam name.");
+                    return;
+                }
+                    
 
                 if (comboBoxCourse.SelectedValue == null || comboBoxSubject.SelectedValue == null)
-                    throw new Exception("Please select course and subject.");
+                {
+                    MessageBox.Show("Please select course and subject.");
+                    return;
+                }
+                    
 
                 string examName = textBoxExamName.Text.Trim();
                 int subjectId = (int)comboBoxSubject.SelectedValue;
 
                 if (controller.ExamExists(examName, subjectId))
-                    throw new Exception("An exam with the same name already exists for the selected course and subject.");
+                {
+                    MessageBox.Show("An exam with the same name already exists for the selected course and subject.");
+
+                }
 
                 controller.AddExam(examName, subjectId);
 
@@ -173,19 +184,32 @@ namespace UnicomTicManagementSystem.Forms
             try
             {
                 if (selectedExamId == 0)
-                    throw new Exception("Please select an exam to update.");
+                {
+                    MessageBox.Show("Please select an exam to update.");
+                    return;
+                }
 
                 if (string.IsNullOrWhiteSpace(textBoxExamName.Text))
-                    throw new Exception("Please enter exam name.");
+                {
+                    MessageBox.Show("Please enter exam name.");
+                    return;
+                }
 
                 if (comboBoxCourse.SelectedValue == null || comboBoxSubject.SelectedValue == null)
-                    throw new Exception("Please select course and subject.");
+                {
+                    MessageBox.Show("Please select course and subject.");
+                    return;
+                }
+
 
                 string examName = textBoxExamName.Text.Trim();
                 int subjectId = (int)comboBoxSubject.SelectedValue;
 
                 if (controller.ExamExists(examName, subjectId, selectedExamId))
-                    throw new Exception("Another exam with the same name already exists for the selected course and subject.");
+                {
+                    MessageBox.Show("Another exam with the same name already exists for the selected course and subject.");
+                    return;
+                }
 
                 controller.UpdateExam(selectedExamId, examName, subjectId);
 
@@ -204,7 +228,10 @@ namespace UnicomTicManagementSystem.Forms
             try
             {
                 if (selectedExamId == 0)
-                    throw new Exception("Please select an exam to delete.");
+                {
+                    MessageBox.Show("Please select an exam to delete.");
+                    return;
+                }
 
                 var confirm = MessageBox.Show("Are you sure you want to delete this exam?", "Confirm Delete", MessageBoxButtons.YesNo);
                 if (confirm == DialogResult.Yes)

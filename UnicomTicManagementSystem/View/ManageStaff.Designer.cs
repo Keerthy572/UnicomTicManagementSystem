@@ -131,7 +131,8 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(695, 387);
+            this.button4.ForeColor = System.Drawing.Color.Red;
+            this.button4.Location = new System.Drawing.Point(713, 415);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 10;

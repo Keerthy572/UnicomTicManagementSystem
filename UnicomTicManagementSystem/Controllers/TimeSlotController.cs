@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Repositories;
 
 public class TimeSlotController
@@ -22,7 +23,8 @@ public class TimeSlotController
         }
         catch (Exception ex)
         {
-            throw new Exception("Failed to load time slots: " + ex.Message);
+           MessageBox.Show("Failed to load time slots: " + ex.Message);
+            return new DataTable();
         }
     }
 
@@ -42,7 +44,7 @@ public class TimeSlotController
         }
         catch (Exception ex)
         {
-            throw new Exception("Failed to add time slot: " + ex.Message);
+            MessageBox.Show("Failed to add time slot: " + ex.Message);
         }
     }
 
@@ -63,7 +65,7 @@ public class TimeSlotController
         }
         catch (Exception ex)
         {
-            throw new Exception("Failed to update time slot: " + ex.Message);
+            MessageBox.Show("Failed to update time slot: " + ex.Message);
         }
     }
 
@@ -82,7 +84,7 @@ public class TimeSlotController
         }
         catch (Exception ex)
         {
-            throw new Exception("Failed to delete time slot: " + ex.Message);
+            MessageBox.Show("Failed to delete time slot: " + ex.Message);
         }
     }
 
@@ -117,7 +119,8 @@ public class TimeSlotController
         }
         catch (Exception ex)
         {
-            throw new Exception("Failed to check overlap: " + ex.Message);
+            MessageBox.Show("Failed to check overlap: " + ex.Message);
+            return false;
         }
     }
 }

@@ -16,9 +16,11 @@ namespace UnicomTicManagementSystem.Repositories
         // Creates all necessary tables in the database if they don't already exist.
         public void InitializeTable()
         {
-            using (SQLiteConnection dbcon = DataBaseCon.Connection())
+            try
             {
-                string initializeTableQuery = @"
+                using (SQLiteConnection dbcon = DataBaseCon.Connection())
+                {
+                    string initializeTableQuery = @"
                         CREATE TABLE IF NOT EXISTS User (
                             UserId INTEGER PRIMARY KEY AUTOINCREMENT,
                             UserName TEXT NOT NULL, 
@@ -88,16 +90,6 @@ namespace UnicomTicManagementSystem.Repositories
                         );
 
 
-
-
-                        CREATE TABLE IF NOT EXISTS LecturerStudent (
-                            LecturerId INTEGER,
-                            StudentId INTEGER,
-                            PRIMARY KEY (StudentId, LecturerId),
-                            FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
-                            FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId)
-                        );
-
                         CREATE TABLE IF NOT EXISTS Room (
                             RoomId INTEGER PRIMARY KEY AUTOINCREMENT,
                             RoomName TEXT NOT NULL, 
@@ -122,27 +114,18 @@ namespace UnicomTicManagementSystem.Repositories
                             FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId),
                             FOREIGN KEY (TimeSlotId) REFERENCES TimeSlot(TimeSlotId),
                             FOREIGN KEY (RoomId) REFERENCES Room(RoomId),
-                            FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId)
+                            FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId) 
+                        );
+
+                        CREATE TABLE IF NOT EXISTS Attendance (
+                            TimetableId INTEGER,
+                            StudentId INTEGER,
+                            Status TEXT NOT NULL,
+                            FOREIGN KEY (TimetableId) REFERENCES Timetable(TimetableId),
+                            FOREIGN KEY (StudentId) REFERENCES Student(StudentId)
 
                         ); 
                         
-                        CREATE TABLE IF NOT EXISTS CourseSubject (
-                            CourseId INTEGER,
-                            SubjectId INTEGER,
-                            PRIMARY KEY (CourseId, SubjectId),
-                            FOREIGN KEY (CourseId) REFERENCES Course(CourseId),
-                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
-                        
-                        );
-
-                        CREATE TABLE IF NOT EXISTS StudentSubject (
-                            StudentId INTEGER,
-                            SubjectId INTEGER,
-                            PRIMARY KEY (StudentId, SubjectId),
-                            FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
-                            FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
-                        
-                        );
 
                         CREATE TABLE IF NOT EXISTS LecturerCourse (
                             LecturerId INTEGER,
@@ -151,42 +134,46 @@ namespace UnicomTicManagementSystem.Repositories
                             FOREIGN KEY (LecturerId) REFERENCES Lecturer(LecturerId),
                             FOREIGN KEY (CourseId) REFERENCES Course(CourseId)
                         
-                        );
-
-                        
-
-
-                        CREATE TABLE IF NOT EXISTS StudentTimetable (
-                            StudentId INTEGER,
-                            TimetableId INTEGER,
-                            PRIMARY KEY (StudentId, TimetableId),
-                            FOREIGN KEY (StudentId) REFERENCES Student(StudentId),
-                            FOREIGN KEY (TimetableId) REFERENCES Timetable(TimetableId)
                         );";
 
-                SQLiteCommand CreateTable = new SQLiteCommand(initializeTableQuery, dbcon);
-                CreateTable.ExecuteNonQuery();
+
+                    SQLiteCommand CreateTable = new SQLiteCommand(initializeTableQuery, dbcon);
+                    CreateTable.ExecuteNonQuery();
 
 
+                }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error creating database tables:\n" + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         // Launches admin registration form if no user records exist.
         public static void AdminRegistration()
         {
-            using (SQLiteConnection conn = DataBaseCon.Connection())
+            try
             {
-                
-                string checkQuery = "SELECT COUNT(*) FROM User";
-                using (SQLiteCommand checkCmd = new SQLiteCommand(checkQuery, conn))
+                using (SQLiteConnection conn = DataBaseCon.Connection())
                 {
-                    long count = (long)checkCmd.ExecuteScalar();
-                    if (count == 0)
+
+                    string checkQuery = "SELECT COUNT(*) FROM User";
+                    using (SQLiteCommand checkCmd = new SQLiteCommand(checkQuery, conn))
                     {
-                        Application.Run(new AdminRegisterForm());
+                        long count = (long)checkCmd.ExecuteScalar();
+                        if (count == 0)
+                        {
+                            Application.Run(new AdminRegisterForm());
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to verify admin account:" + ex.Message, "Startup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
 

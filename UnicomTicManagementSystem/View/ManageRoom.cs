@@ -69,7 +69,10 @@ namespace UnicomTicManagementSystem.Forms
             try
             {
                 if (string.IsNullOrWhiteSpace(textBox1.Text) || comboBox1.SelectedIndex == -1)
-                    throw new Exception("Please enter a room name and select a room type.");
+                {
+                    MessageBox.Show("Please enter a room name and select a room type.");
+                    return;
+                }
 
                 Room room = new Room
                 {
@@ -94,10 +97,16 @@ namespace UnicomTicManagementSystem.Forms
             try
             {
                 if (selectedRoomId == 0)
-                    throw new Exception("Please select a room to update.");
+                {
+                    MessageBox.Show("Please select a room to update.");
+                    return;
+                }
 
                 if (string.IsNullOrWhiteSpace(textBox1.Text) || comboBox1.SelectedIndex == -1)
-                    throw new Exception("Please enter a room name and select a room type.");
+                {
+                    MessageBox.Show("Please enter a room name and select a room type.");
+                    return;
+                }
 
                 Room room = new Room
                 {
@@ -123,7 +132,10 @@ namespace UnicomTicManagementSystem.Forms
             try
             {
                 if (selectedRoomId == 0)
-                    throw new Exception("Please select a room to delete.");
+                {
+                    MessageBox.Show("Please select a room to delete.");
+                    return;
+                }
 
                 DialogResult confirm = MessageBox.Show("Are you sure you want to delete this room?", "Confirm", MessageBoxButtons.YesNo);
                 if (confirm == DialogResult.Yes)

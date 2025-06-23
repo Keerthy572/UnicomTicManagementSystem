@@ -51,7 +51,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while fetching students: " + ex.Message);
+                MessageBox.Show("Error while fetching students: " + ex.Message);
             }
 
             return studentList;
@@ -73,7 +73,8 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while checking password uniqueness: " + ex.Message);
+                MessageBox.Show("Error while checking password uniqueness: " + ex.Message);
+                return false;
             }
         }
 
@@ -81,7 +82,11 @@ namespace UnicomTicManagementSystem.Controllers
         public void AddStudent(Student student)
         {
             if (!IsPasswordUnique(student.password))
-                throw new Exception("Password already exists!"); // Validate password uniqueness
+            {
+                MessageBox.Show("Password already exists!");
+                return;
+            }
+                
 
             try
             {
@@ -113,7 +118,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while adding student: " + ex.Message);
+                MessageBox.Show("Error while adding student: " + ex.Message);
             }
         }
 
@@ -148,7 +153,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while updating student: " + ex.Message);
+                MessageBox.Show("Error while updating student: " + ex.Message);
             }
         }
 
@@ -176,7 +181,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while deleting student: " + ex.Message);
+                MessageBox.Show("Error while deleting student: " + ex.Message);
             }
         }
 
@@ -204,7 +209,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while fetching courses: " + ex.Message);
+                MessageBox.Show("Error while fetching courses: " + ex.Message);
             }
             return courses;
         }
@@ -233,7 +238,8 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while fetching groups: " + ex.Message);
+                MessageBox.Show("Error while fetching groups: " + ex.Message);
+                return new List<Group>();
             }
 
             return groups;

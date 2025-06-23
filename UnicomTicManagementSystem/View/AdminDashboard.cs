@@ -89,6 +89,11 @@ namespace UnicomTicManagementSystem.View
         // Logs out the current user and returns to login form
         private void button9_Click(object sender, EventArgs e)
         {
+            LoadFormInAdminPanel(new MarkAttendance());
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
             try
             {
                 this.Hide();
@@ -101,5 +106,6 @@ namespace UnicomTicManagementSystem.View
                 MessageBox.Show("An error occurred while logging out: " + ex.Message, "Logout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

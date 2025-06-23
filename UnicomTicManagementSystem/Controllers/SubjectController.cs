@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -12,9 +13,10 @@ namespace UnicomTicManagementSystem.Controllers
         public string AddSubject(Subject sub, Course course)
         {
             if (string.IsNullOrWhiteSpace(sub.subjectName))
-                throw new Exception("Subject name cannot be empty.");
+                return "Subject name cannot be empty.";
+
             if (course == null || course.courseId <= 0)
-                throw new Exception("Invalid course selected.");
+                return "Invalid course selected.";
 
             try
             {
@@ -71,7 +73,8 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Error retrieving subjects: " + ex.Message);
+                MessageBox.Show("Error retrieving subjects: " + ex.Message);
+                return new List<Subject>();
             }
         }
 

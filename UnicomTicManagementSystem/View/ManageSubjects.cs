@@ -17,10 +17,6 @@ namespace UnicomTicManagementSystem.View
         {
             InitializeComponent();
             adminDashboard = dashboard;
-
-            this.Load += ManageSubjects_Load;
-            dataGridViewSubjects.CellClick += dataGridViewSubjects_CellClick_1;
-
             RefreshSubjectGrid();
         }
 

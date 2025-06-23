@@ -50,7 +50,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(692, 398);
+            this.button1.ForeColor = System.Drawing.Color.Red;
+            this.button1.Location = new System.Drawing.Point(713, 415);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -100,7 +101,7 @@
             this.dataGridViewSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSubjects.Location = new System.Drawing.Point(40, 165);
             this.dataGridViewSubjects.Name = "dataGridViewSubjects";
-            this.dataGridViewSubjects.Size = new System.Drawing.Size(341, 197);
+            this.dataGridViewSubjects.Size = new System.Drawing.Size(485, 273);
             this.dataGridViewSubjects.TabIndex = 6;
             this.dataGridViewSubjects.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSubjects_CellClick_1);
             // 
@@ -128,6 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);

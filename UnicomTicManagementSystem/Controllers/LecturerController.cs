@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -22,7 +23,10 @@ namespace UnicomTicManagementSystem.Controllers
                     long count = (long)checkCmd.ExecuteScalar();
 
                     if (count > 0)
-                        throw new Exception("Password already exists. Please choose a different one.");
+                    {
+                        MessageBox.Show("Password already exists. Please choose a different one.");
+                        return;
+                    }
 
                     // Insert into User table
                     string insertUser = "INSERT INTO User (UserName, Password, UserType) VALUES (@uname, @pwd, 'lecturer');";
@@ -44,7 +48,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to add lecturer: " + ex.Message);
+                MessageBox.Show("Failed to add lecturer: " + ex.Message);
             }
         }
 
@@ -63,7 +67,10 @@ namespace UnicomTicManagementSystem.Controllers
                     long count = (long)checkCmd.ExecuteScalar();
 
                     if (count > 0)
-                        throw new Exception("Password already exists. Please choose a different one.");
+                    {
+                        MessageBox.Show("Password already exists. Please choose a different one.");
+                        return;
+                    }
 
                     // Update User table
                     string updateUser = "UPDATE User SET UserName = @uname, Password = @pwd WHERE UserId = @uid;";
@@ -84,7 +91,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to update lecturer: " + ex.Message);
+                MessageBox.Show("Failed to update lecturer: " + ex.Message);
             }
         }
 
@@ -110,7 +117,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to delete lecturer: " + ex.Message);
+                MessageBox.Show("Failed to delete lecturer: " + ex.Message);
             }
         }
 
@@ -153,7 +160,8 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to retrieve lecturers: " + ex.Message);
+                MessageBox.Show("Failed to retrieve lecturers: " + ex.Message);
+                return list;
             }
         }
     }

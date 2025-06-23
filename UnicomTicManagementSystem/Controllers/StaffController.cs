@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -44,7 +45,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to add staff: " + ex.Message);
+                MessageBox.Show("Failed to add staff: " + ex.Message);
             }
         }
 
@@ -83,7 +84,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to update staff: " + ex.Message);
+                MessageBox.Show("Failed to update staff: " + ex.Message);
             }
         }
 
@@ -109,7 +110,7 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to delete staff: " + ex.Message);
+                MessageBox.Show("Failed to delete staff: " + ex.Message);
             }
         }
 
@@ -147,7 +148,8 @@ namespace UnicomTicManagementSystem.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to retrieve staff data: " + ex.Message);
+                MessageBox.Show("Failed to retrieve staff data: " + ex.Message);
+                return new List<Staff>();
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -35,7 +36,7 @@ namespace UnicomTicManagementSystem.Controllers
             catch (Exception ex)
             {
                 // In production you might log the error instead
-                throw new Exception("Error loading groups: " + ex.Message);
+                MessageBox.Show("Error loading groups: " + ex.Message);
             }
 
             return groups;

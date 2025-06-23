@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -365,5 +366,83 @@ namespace UnicomTicManagementSystem.Controllers
                 return false;
             }
         }
+
+        // Get timetables for a certain Lecturer
+        public List<Timetable> GetTimetablesByLecturerUserId(int userId)
+        {
+            var list = new List<Timetable>();
+            try
+            {
+                using (var conn = DataBaseCon.Connection())
+                {
+                    // First, get LecturerId from UserId
+                    string getLecturerIdQuery = "SELECT LecturerId FROM Lecturer WHERE UserId = @UserId";
+                    int lecturerId = -1;
+
+                    using (var cmd = new SQLiteCommand(getLecturerIdQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                            lecturerId = Convert.ToInt32(result);
+                        else
+                            return list; // No matching lecturer found
+                    }
+
+                    // Now fetch timetables for this LecturerId
+                    string query = @"
+                        SELECT t.TimetableId, t.SubjectId, s.SubjectName, 
+                               t.RoomId, r.RoomName,
+                               t.TimeSlotId, ts.StartTime, ts.EndTime,
+                               t.LecturerId, l.LecturerName,
+                               t.GroupId, g.GroupName,
+                               t.Date
+                        FROM Timetable t
+                        JOIN Subjects s ON t.SubjectId = s.SubjectId
+                        JOIN Room r ON t.RoomId = r.RoomId
+                        JOIN TimeSlot ts ON t.TimeSlotId = ts.TimeSlotId
+                        JOIN Lecturer l ON t.LecturerId = l.LecturerId
+                        JOIN Groups g ON t.GroupId = g.GroupId
+                        WHERE t.LecturerId = @LecturerId";
+
+                    using (var cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@LecturerId", lecturerId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                list.Add(new Timetable
+                                {
+                                    TimetableId = Convert.ToInt32(reader["TimetableId"]),
+                                    SubjectId = Convert.ToInt32(reader["SubjectId"]),
+                                    SubjectName = reader["SubjectName"].ToString(),
+                                    RoomId = Convert.ToInt32(reader["RoomId"]),
+                                    RoomName = reader["RoomName"].ToString(),
+                                    TimeSlotId = Convert.ToInt32(reader["TimeSlotId"]),
+                                    StartTime = reader["StartTime"].ToString(),
+                                    EndTime = reader["EndTime"].ToString(),
+                                    TimeSlot = reader["StartTime"] + " - " + reader["EndTime"],
+                                    LecturerId = Convert.ToInt32(reader["LecturerId"]),
+                                    LecturerName = reader["LecturerName"].ToString(),
+                                    GroupId = Convert.ToInt32(reader["GroupId"]),
+                                    GroupName = reader["GroupName"].ToString(),
+                                    Date = reader["Date"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Something went wrong : " + ex.Message);
+            }
+            
+
+            return list;
+        }
+
     }
 }

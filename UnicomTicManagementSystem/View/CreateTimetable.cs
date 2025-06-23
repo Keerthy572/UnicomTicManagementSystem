@@ -380,12 +380,6 @@ namespace UnicomTicManagementSystem.View
             }
         }
 
-        // Form Load event handler (currently unused).
-        private void CreateTimetable_Load(object sender, EventArgs e)
-        {
-            // No code needed here currently
-        }
-
         // Closes the CreateTimetable form.
         private void button1_Click(object sender, EventArgs e)
         {

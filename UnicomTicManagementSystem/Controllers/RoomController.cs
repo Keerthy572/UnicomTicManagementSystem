@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
 using UnicomTicManagementSystem.Repositories;
 
@@ -13,7 +14,11 @@ namespace UnicomTicManagementSystem.Controllers
         public void AddRoom(Room room)
         {
             if (string.IsNullOrWhiteSpace(room.roomName) || string.IsNullOrWhiteSpace(room.roomType))
-                throw new Exception("Room Name and Room Type are required.");
+            {
+                MessageBox.Show("Room Name and Room Type are required.");
+                return;
+            }
+                
 
             using (SQLiteConnection con = DataBaseCon.Connection())
             {
@@ -28,7 +33,10 @@ namespace UnicomTicManagementSystem.Controllers
                         long count = (long)checkCmd.ExecuteScalar();
 
                         if (count > 0)
-                            throw new Exception("Room already exists.");
+                        {
+                            MessageBox.Show("Room already exists.");
+                            return;
+                        }
                     }
 
                     // Insert new room
@@ -42,7 +50,7 @@ namespace UnicomTicManagementSystem.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error while adding room: " + ex.Message);
+                    MessageBox.Show("Error while adding room: " + ex.Message);
                 }
             }
         }
@@ -51,10 +59,18 @@ namespace UnicomTicManagementSystem.Controllers
         public void UpdateRoom(Room room)
         {
             if (room.roomId <= 0)
-                throw new Exception("Invalid room selected.");
+            {
+                MessageBox.Show("Invalid room selected.");
+                return;
+            }
+                
 
             if (string.IsNullOrWhiteSpace(room.roomName) || string.IsNullOrWhiteSpace(room.roomType))
-                throw new Exception("Room Name and Room Type are required.");
+            {
+                MessageBox.Show("Room Name and Room Type are required.");
+                return;
+            }
+                
 
             using (SQLiteConnection con = DataBaseCon.Connection())
             {
@@ -74,7 +90,7 @@ namespace UnicomTicManagementSystem.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error while updating room: " + ex.Message);
+                    MessageBox.Show("Error while updating room: " + ex.Message);
                 }
             }
         }
@@ -83,7 +99,11 @@ namespace UnicomTicManagementSystem.Controllers
         public void DeleteRoom(int roomId)
         {
             if (roomId <= 0)
-                throw new Exception("Invalid room selected.");
+            {
+                MessageBox.Show("Invalid room selected.");
+                return;
+            }
+                
 
             using (SQLiteConnection con = DataBaseCon.Connection())
             {
@@ -96,12 +116,15 @@ namespace UnicomTicManagementSystem.Controllers
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected == 0)
-                            throw new Exception("No room found to delete.");
+                        {
+                            MessageBox.Show("No room found to delete.");
+                            return;
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error while deleting room: " + ex.Message);
+                    MessageBox.Show("Error while deleting room: " + ex.Message);
                 }
             }
         }
@@ -123,7 +146,8 @@ namespace UnicomTicManagementSystem.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error retrieving rooms: " + ex.Message);
+                    MessageBox.Show("Error retrieving rooms: " + ex.Message);
+                    return null;
                 }
             }
         }

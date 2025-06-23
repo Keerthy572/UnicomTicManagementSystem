@@ -132,5 +132,6 @@ namespace UnicomTicManagementSystem.View
         {
             this.Close();
         }
+
     }
 }

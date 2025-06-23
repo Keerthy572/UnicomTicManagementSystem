@@ -107,15 +107,16 @@
             // dgvTimeSlots
             // 
             this.dgvTimeSlots.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTimeSlots.Location = new System.Drawing.Point(36, 169);
+            this.dgvTimeSlots.Location = new System.Drawing.Point(36, 132);
             this.dgvTimeSlots.Name = "dgvTimeSlots";
-            this.dgvTimeSlots.Size = new System.Drawing.Size(403, 238);
+            this.dgvTimeSlots.Size = new System.Drawing.Size(499, 306);
             this.dgvTimeSlots.TabIndex = 7;
             this.dgvTimeSlots.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTimeSlots_CellClick);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(677, 367);
+            this.button1.ForeColor = System.Drawing.Color.Red;
+            this.button1.Location = new System.Drawing.Point(713, 415);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 8;
@@ -127,6 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvTimeSlots);

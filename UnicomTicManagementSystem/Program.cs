@@ -23,6 +23,7 @@ namespace UnicomTicManagementSystem
 
             // Start the application with the login form
             Application.Run(new LoginForm());
+            
         }
     }
 }

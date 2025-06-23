@@ -143,5 +143,30 @@ namespace UnicomTicManagementSystem.View
                 MessageBox.Show("Failed to logout: " + ex.Message);
             }
         }
+
+        // To view attendance of currently logggedin student
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var controller = new AttendanceController();
+                var records = controller.GetStudentMarkedAttendance(Dashboard.userId);
+
+                if (records.Count == 0)
+                {
+                    MessageBox.Show("No attendance records found.");
+                    return;
+                }
+
+                dataGridView1.DataSource = records;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.ReadOnly = true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Something went wrong : " + ex.Message);
+            }
+            
+        }
     }
 }
