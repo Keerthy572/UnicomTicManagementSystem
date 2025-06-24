@@ -165,7 +165,7 @@ namespace UnicomTicManagementSystem.View
 
                 studentController.AddStudent(student);
                 LoadStudents();
-                MessageBox.Show("Student added.");
+               
                 ClearInputs();
             }
             catch (Exception ex)
@@ -218,7 +218,7 @@ namespace UnicomTicManagementSystem.View
 
                 studentController.UpdateStudent(student);
                 LoadStudents();
-                MessageBox.Show("Student updated.");
+               
                 ClearInputs();
             }
             catch (Exception ex)

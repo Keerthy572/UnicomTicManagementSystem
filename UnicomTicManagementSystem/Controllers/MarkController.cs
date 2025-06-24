@@ -219,6 +219,7 @@ namespace UnicomTicManagementSystem.Controllers
                         cmd.ExecuteNonQuery();
                     }
                 }
+                MessageBox.Show("Marks deleted successfully.");
             }
             catch (Exception ex)
             {

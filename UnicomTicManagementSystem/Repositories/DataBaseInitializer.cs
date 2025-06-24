@@ -150,7 +150,7 @@ namespace UnicomTicManagementSystem.Repositories
             
         }
 
-        // Launches admin registration form if no user records exist.
+        // Launches admin registration form if no user records exist and run login form
         public static void AdminRegistration()
         {
             try
@@ -164,7 +164,13 @@ namespace UnicomTicManagementSystem.Repositories
                         long count = (long)checkCmd.ExecuteScalar();
                         if (count == 0)
                         {
+                            //When registered successfully it also runs login form
                             Application.Run(new AdminRegisterForm());
+                        }
+                        else
+                        {
+                            // Start the application with the login form
+                            Application.Run(new LoginForm());
                         }
                     }
                 }

@@ -83,7 +83,7 @@ namespace UnicomTicManagementSystem.View
                 if (comboBox1.SelectedValue is int examId)
                 {
                     markController.AddOrUpdateMarks(examId, dataGridView1);
-                    MessageBox.Show("Marks updated successfully.");
+                    
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace UnicomTicManagementSystem.View
                     {
                         markController.DeleteMarks(examId);
                         dataGridView1.DataSource = markController.GetStudentsWithMarks(examId);
-                        MessageBox.Show("Marks deleted successfully.");
+                        
                     }
                 }
                 else

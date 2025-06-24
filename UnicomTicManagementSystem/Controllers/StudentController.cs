@@ -115,6 +115,7 @@ namespace UnicomTicManagementSystem.Controllers
 
                     transaction.Commit();
                 }
+                MessageBox.Show("Student added.");
             }
             catch (Exception ex)
             {
@@ -150,6 +151,7 @@ namespace UnicomTicManagementSystem.Controllers
 
                     transaction.Commit();
                 }
+                MessageBox.Show("Student updated.");
             }
             catch (Exception ex)
             {

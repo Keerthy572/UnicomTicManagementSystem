@@ -18,11 +18,10 @@ namespace UnicomTicManagementSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Automatically register a default admin user if none exists
+            // Automatically register a default admin user if none exists and run login form
             DataBaseInitializer.AdminRegistration();
 
-            // Start the application with the login form
-            Application.Run(new LoginForm());
+           
             
         }
     }

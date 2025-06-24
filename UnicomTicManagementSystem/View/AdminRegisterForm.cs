@@ -70,6 +70,9 @@ namespace UnicomTicManagementSystem.View
                 }
 
                 MessageBox.Show("Admin registered successfully");
+                this.Hide();
+                var form = new LoginForm();
+                form.ShowDialog();
                 this.Close();
             }
             catch (Exception ex)
